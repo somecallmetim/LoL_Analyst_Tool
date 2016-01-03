@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Created by timbauer on 12/27/15.
  */
-public class RecordGame extends JPanel implements KeyListener {
+public class RecordGameOverlay extends JPanel implements KeyListener {
 
     long timeEventOccurred = 0;
     String top = "top warded";
@@ -31,7 +31,7 @@ public class RecordGame extends JPanel implements KeyListener {
 
     int xCoord, yCoord;
 
-    public RecordGame(String team, String teamRegion, MainWindow parentFrame) throws IOException, Exception {
+    public RecordGameOverlay(String team, String teamRegion, MainWindow parentFrame) throws IOException, Exception {
 
         this.team = team;
         this.teamRegion = teamRegion;

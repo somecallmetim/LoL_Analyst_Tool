@@ -48,7 +48,7 @@ public class ReviewGamesMenu extends JPanel {
                 parentFrame.removeMenu();
 
                 try{
-                    new ReviewGame(selectedGame, parentFrame);
+                    new ReviewGameOverlay(selectedGame, parentFrame);
                 }catch (Exception e1){System.out.println("GetGamesMenu " + e1);}
             }
         };

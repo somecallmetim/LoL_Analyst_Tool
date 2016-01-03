@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Created by timbauer on 12/27/15.
  */
-public class ReviewGame extends JPanel{
+public class ReviewGameOverlay extends JPanel{
 
 
     ArrayList<Object[]> gameEventResults;
@@ -24,7 +24,7 @@ public class ReviewGame extends JPanel{
 
 
 
-    public ReviewGame(String gameName, MainWindow parentFrame)throws Exception{
+    public ReviewGameOverlay(String gameName, MainWindow parentFrame)throws Exception{
 
         this.parentFrame = parentFrame;
 

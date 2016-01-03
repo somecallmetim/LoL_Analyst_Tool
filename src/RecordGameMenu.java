@@ -60,7 +60,7 @@ public class RecordGameMenu extends JPanel{
                 teamRegion = teamRegionComboBox.getSelectedItem().toString();
                 parentFrame.removeMenu();
                 try{
-                    new RecordGame(teamName, teamRegion, parentFrame);
+                    new RecordGameOverlay(teamName, teamRegion, parentFrame);
                 }catch (Exception e1){
                     System.out.println("Recording Map Menu\n" + e1);
                 }

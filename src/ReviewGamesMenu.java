@@ -8,18 +8,16 @@ import java.util.ArrayList;
 /**
  * Created by timbauer on 12/27/15.
  */
-public class ReviewGamesMenu extends JPanel {
+public class ReviewGamesMenu extends TransparentOverlayBaseClass {
 
     ArrayList<String> listOfGames;
     String selectedGame;
     JList<String> games;
-    int width = 1000;
-    int height = 800;
-    Dimension windowDimension = new Dimension(width, height);
 
-    public ReviewGamesMenu(MainWindow originalParentFrame){
 
-        final MainWindow parentFrame = originalParentFrame;
+    public ReviewGamesMenu(final Dimension windowDimension, MainWindow originalParentFrame){
+        super(windowDimension, originalParentFrame);
+        super.setParentFrame(originalParentFrame);
 
         try{
             listOfGames = DatabaseManager.getListOfRecordedGames();
@@ -35,10 +33,6 @@ public class ReviewGamesMenu extends JPanel {
 
 
         this.setLayout(new FlowLayout());
-        this.setPreferredSize(windowDimension);
-        this.setBounds(0, 0, width, height);
-        this.setBackground(new Color(0, 0, 0, 0));
-        this.setOpaque(false);
         this.add(games);
 
         MouseListener mouseListener = new MouseAdapter() {
@@ -48,7 +42,7 @@ public class ReviewGamesMenu extends JPanel {
                 parentFrame.removeMenu();
 
                 try{
-                    new ReviewGameOverlay(selectedGame, parentFrame);
+                    new ReviewGameOverlay(selectedGame, windowDimension, parentFrame);
                 }catch (Exception e1){System.out.println("GetGamesMenu " + e1);}
             }
         };

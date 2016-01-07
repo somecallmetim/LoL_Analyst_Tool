@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Created by timbauer on 12/27/15.
  */
-public class ReviewGameOverlay extends JPanel{
+public class ReviewGameOverlay extends TransparentOverlayBaseClass {
 
 
     ArrayList<Object[]> gameEventResults;
@@ -17,22 +17,12 @@ public class ReviewGameOverlay extends JPanel{
     Boolean invalidEvent = false;
     long time;
     int xCoord, yCoord;
-    MainWindow parentFrame;
-    int width = 1000;
-    int height = 800;
-    Dimension windowDimension = new Dimension(width, height);
 
 
-
-    public ReviewGameOverlay(String gameName, MainWindow parentFrame)throws Exception{
-
-        this.parentFrame = parentFrame;
+    public ReviewGameOverlay(String gameName,Dimension windowDimension, MainWindow parentFrame)throws Exception{
+        super(windowDimension, parentFrame);
 
         this.setLayout(null);
-        this.setPreferredSize(windowDimension);
-        this.setBounds(0, 0, width, height);
-        this.setBackground(new Color(0, 0, 0, 0));
-        this.setOpaque(false);
 
         parentFrame.addMenu(this);
 

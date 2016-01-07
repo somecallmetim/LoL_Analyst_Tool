@@ -9,29 +9,20 @@ import java.awt.event.ActionListener;
 /**
  * Created by timbauer on 12/7/15.
  */
-public class MainMenu extends JPanel{
+public class MainMenu extends TransparentOverlayBaseClass {
 
     JButton recordNewGame, reviewRecordedGames;
     JPanel recordingMapMenu, reviewGamesMenu;
-    MainWindow parentFrame;
     Dimension buttonSize = new Dimension(180, 30);
-    int width;
-    int height;
     Dimension windowDimension;
+    MainWindow parentFrame;
 
 
-    public MainMenu(int width, int height, MainWindow parentFrame){
 
-        this.width = width;
-        this.height = height;
-        windowDimension = new Dimension(width, height);
-
+    public MainMenu(Dimension windowDimension, MainWindow parentFrame){
+        super(windowDimension, parentFrame);
+        this.windowDimension = windowDimension;
         this.parentFrame = parentFrame;
-
-        this.setPreferredSize(windowDimension);
-        this.setBounds(0, 0, width, height);
-        this.setBackground(new Color(0, 0, 0, 0));
-        this.setOpaque(false);
 
 
         ButtonListener buttonListener = new ButtonListener();
@@ -58,11 +49,11 @@ public class MainMenu extends JPanel{
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == recordNewGame){
                 parentFrame.removeMenu();
-                recordingMapMenu = new RecordGameMenu(parentFrame);
+                recordingMapMenu = new RecordGameMenu(windowDimension, parentFrame);
                 parentFrame.addMenu(recordingMapMenu);
             }else if (e.getSource() == reviewRecordedGames){
                 parentFrame.removeMenu();
-                reviewGamesMenu = new ReviewGamesMenu(parentFrame);
+                reviewGamesMenu = new ReviewGamesMenu(windowDimension, parentFrame);
                 parentFrame.addMenu(reviewGamesMenu);
             }
         }

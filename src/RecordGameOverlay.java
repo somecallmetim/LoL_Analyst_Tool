@@ -21,9 +21,7 @@ public class RecordGameOverlay extends JPanel implements KeyListener {
     String whatOccurred = jungle;
     String team, teamRegion, gameName;
 
-    int width = 1000;
-    int height = 800;
-    Dimension windowDimension = new Dimension(width, height);
+    Dimension windowDimension;
 
     JPanel labelHoldingPanel;
     MainWindow parentFrame;
@@ -31,8 +29,8 @@ public class RecordGameOverlay extends JPanel implements KeyListener {
 
     int xCoord, yCoord;
 
-    public RecordGameOverlay(String team, String teamRegion, MainWindow parentFrame) throws IOException, Exception {
-
+    public RecordGameOverlay(String team, String teamRegion,Dimension windowDimension, MainWindow parentFrame) throws IOException, Exception {
+        this.windowDimension = windowDimension;
         this.team = team;
         this.teamRegion = teamRegion;
         this.parentFrame = parentFrame;
@@ -45,7 +43,7 @@ public class RecordGameOverlay extends JPanel implements KeyListener {
 
         labelHoldingPanel.setLayout(new FlowLayout());
         labelHoldingPanel.setPreferredSize(windowDimension);
-        labelHoldingPanel.setBounds(0, 0, width, height);
+        labelHoldingPanel.setBounds(0, 0, (int)windowDimension.getWidth(), (int)windowDimension.getHeight());
         labelHoldingPanel.setBackground(new Color(0, 0, 0, 0));
         labelHoldingPanel.setOpaque(false);
 

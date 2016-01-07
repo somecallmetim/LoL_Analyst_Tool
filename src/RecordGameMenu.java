@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by timbauer on 12/27/15.
  */
-public class RecordGameMenu extends JPanel{
+public class RecordGameMenu extends TransparentOverlayBaseClass {
 
 
     JTextField teamNameTextBox;
@@ -14,23 +14,16 @@ public class RecordGameMenu extends JPanel{
     JComboBox<String> teamRegionComboBox;
     JButton goToRecordingMapWindow;
     String teamName, teamRegion;
-    JLayeredPane mainLayeredPane;
-    int width = 1000;
-    int height = 800;
-    Dimension windowDimension = new Dimension(width, height);
+
     MainWindow parentFrame;
+    Dimension windowDimension;
 
-    public RecordGameMenu(MainWindow parentFrame){
-
+    public RecordGameMenu(Dimension windowDimension, MainWindow parentFrame){
+        super(windowDimension, parentFrame);
         this.parentFrame = parentFrame;
-
-        mainLayeredPane = new JLayeredPane();
+        this.windowDimension = windowDimension;
 
         this.setLayout(new FlowLayout());
-        this.setPreferredSize(windowDimension);
-        this.setBounds(0, 0, width, height);
-        this.setBackground(new Color(0, 0, 0, 0));
-        this.setOpaque(false);
 
         teamNameTextBox = new JTextField("Team Name");
 
@@ -60,7 +53,7 @@ public class RecordGameMenu extends JPanel{
                 teamRegion = teamRegionComboBox.getSelectedItem().toString();
                 parentFrame.removeMenu();
                 try{
-                    new RecordGameOverlay(teamName, teamRegion, parentFrame);
+                    new RecordGameOverlay(teamName, teamRegion, windowDimension, parentFrame);
                 }catch (Exception e1){
                     System.out.println("Recording Map Menu\n" + e1);
                 }

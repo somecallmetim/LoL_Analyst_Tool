@@ -25,7 +25,7 @@ public class MainWindow extends JFrame {
 
             backgroundMapPanel = new BackgroundMapPanel(ImageManager.SrMap);
             mainLayeredPane = new JLayeredPane();
-            currentMenu = new MainMenu(width, height, mainWindow);
+            currentMenu = new MainMenu(windowDimension, mainWindow);
 
             backgroundMapPanel.setPreferredSize(windowDimension);
             backgroundMapPanel.setBounds(0, 0, width, height);
@@ -42,6 +42,7 @@ public class MainWindow extends JFrame {
 
             mainLayeredPane.add(backgroundMapPanel, JLayeredPane.DEFAULT_LAYER);
             mainLayeredPane.add(currentMenu, JLayeredPane.PALETTE_LAYER);
+
         }
 
         return mainWindow;

@@ -29,7 +29,7 @@ public class RecordGameOverlay extends JPanel implements KeyListener {
 
     int xCoord, yCoord;
 
-    public RecordGameOverlay(String team, String teamRegion,Dimension windowDimension, MainWindow parentFrame) throws IOException, Exception {
+    public RecordGameOverlay(String team, String teamRegion, Dimension windowDimension, MainWindow parentFrame) throws IOException, Exception {
         this.windowDimension = windowDimension;
         this.team = team;
         this.teamRegion = teamRegion;

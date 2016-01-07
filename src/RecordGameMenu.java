@@ -8,12 +8,12 @@ import java.awt.event.ActionListener;
  */
 public class RecordGameMenu extends TransparentOverlayBaseClass {
 
-
     JTextField teamNameTextBox;
     JComboBox teamNameFromDb;
     JComboBox<String> teamRegionComboBox;
     JButton goToRecordingMapWindow;
     String teamName, teamRegion;
+    StartRecordingOverlay startRecordingOverlay;
 
     MainWindow parentFrame;
     Dimension windowDimension;
@@ -53,10 +53,11 @@ public class RecordGameMenu extends TransparentOverlayBaseClass {
                 teamRegion = teamRegionComboBox.getSelectedItem().toString();
                 parentFrame.removeMenu();
                 try{
-                    new RecordGameOverlay(teamName, teamRegion, windowDimension, parentFrame);
-                }catch (Exception e1){
-                    System.out.println("Recording Map Menu\n" + e1);
+                    startRecordingOverlay = new StartRecordingOverlay(teamName, teamRegion, windowDimension, parentFrame);
+                }catch (Exception exception){
+                    System.out.println("Recording Map Menu\n" + exception);
                 }
+                parentFrame.addMenu(startRecordingOverlay);
 
             }
         }

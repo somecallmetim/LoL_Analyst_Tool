@@ -5,7 +5,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 
 /**
  * Created by timbauer on 12/7/15.
@@ -15,8 +14,6 @@ public class MainMenu extends TransparentOverlayBaseClass {
     JButton recordNewGame, reviewRecordedGames;
     JPanel recordingMapMenu, reviewGamesMenu;
     Dimension buttonSize = new Dimension(180, 30);
-
-    ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
     Dimension windowDimension;
     MainWindow parentFrame;
 
@@ -43,10 +40,7 @@ public class MainMenu extends TransparentOverlayBaseClass {
         reviewRecordedGames.setPreferredSize(buttonSize);
         this.add(reviewRecordedGames);
 
-        screenOverlayStack.push(this);
-        HashMap<JButton, Class<?>> buttonListenerArguments = new HashMap<>(2);
-        buttonListenerArguments.put(recordNewGame, RecordGameMenu.class);
-        buttonListenerArguments.put(reviewRecordedGames, ReviewGamesMenu.class);
+
 
     }
 
@@ -55,7 +49,7 @@ public class MainMenu extends TransparentOverlayBaseClass {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == recordNewGame){
                 parentFrame.removeMenu();
-                recordingMapMenu = new RecordGameMenu();
+                recordingMapMenu = new RecordGameMenu(windowDimension, parentFrame);
                 parentFrame.addMenu(recordingMapMenu);
             }else if (e.getSource() == reviewRecordedGames){
                 parentFrame.removeMenu();

@@ -9,7 +9,6 @@ public class Main {
         EventTimer.getEventTimer();
         DatabaseManager.getDatabaseManager();
         ImageManager.getImageManager();
-        ButtonListenerFactory buttonListenerFactory = new ButtonListenerFactory();
-        ScreenOverlayStack.getScreenOverlayStack();
+        MainWindow.getMainWindow();
     }
 }

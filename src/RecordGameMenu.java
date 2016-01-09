@@ -8,19 +8,19 @@ import java.awt.event.ActionListener;
  */
 public class RecordGameMenu extends TransparentOverlayBaseClass {
 
-    private JTextField teamNameTextBox;
-    private JComboBox teamNameFromDb;
-    private JComboBox<String> teamRegionComboBox;
-    private JButton goToRecordingMapWindow;
-    public static String teamName, teamRegion;
+    JTextField teamNameTextBox;
+    JComboBox teamNameFromDb;
+    JComboBox<String> teamRegionComboBox;
+    JButton goToRecordingMapWindow;
+    String teamName, teamRegion;
     StartRecordingOverlay startRecordingOverlay;
 
-    MainWindow mainWindow;
+    MainWindow parentFrame;
     Dimension windowDimension;
 
-    public RecordGameMenu(){
-        super(MainWindow.windowDimension, ButtonListenerFactory.getMainWindow());
-        this.mainWindow = ButtonListenerFactory.getMainWindow();
+    public RecordGameMenu(Dimension windowDimension, MainWindow parentFrame){
+        super(windowDimension, parentFrame);
+        this.parentFrame = parentFrame;
         this.windowDimension = windowDimension;
 
         this.setLayout(new FlowLayout());
@@ -51,13 +51,13 @@ public class RecordGameMenu extends TransparentOverlayBaseClass {
 
                 teamName = teamNameTextBox.getText();
                 teamRegion = teamRegionComboBox.getSelectedItem().toString();
-                mainWindow.removeMenu();
+                parentFrame.removeMenu();
                 try{
-                    startRecordingOverlay = new StartRecordingOverlay();
+                    startRecordingOverlay = new StartRecordingOverlay(teamName, teamRegion, windowDimension, parentFrame);
                 }catch (Exception exception){
                     System.out.println("Recording Map Menu\n" + exception);
                 }
-                mainWindow.addMenu(startRecordingOverlay);
+                parentFrame.addMenu(startRecordingOverlay);
 
             }
         }

@@ -12,7 +12,6 @@ public class ReviewGameOverlay extends TransparentOverlayBaseClass {
     ArrayList<Object[]> gameEventResults;
     Object[][] gameResults;
     Object[] eventHolder;
-    String gameName;
     JLabel event;
     BufferedImage icon;
     Boolean invalidEvent = false;
@@ -20,9 +19,8 @@ public class ReviewGameOverlay extends TransparentOverlayBaseClass {
     int xCoord, yCoord;
 
 
-    public ReviewGameOverlay()throws Exception{
-        super(MainWindow.windowDimension, ButtonListenerFactory.getMainWindow());
-        gameName = ReviewGamesMenu.selectedGame;
+    public ReviewGameOverlay(String gameName,Dimension windowDimension, MainWindow parentFrame)throws Exception{
+        super(windowDimension, parentFrame);
 
         this.setLayout(null);
 

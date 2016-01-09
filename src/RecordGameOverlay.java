@@ -24,22 +24,22 @@ public class RecordGameOverlay extends JPanel implements KeyListener {
     Dimension windowDimension;
 
     JPanel labelHoldingPanel;
-    MainWindow mainWindow;
+    MainWindow parentFrame;
 
 
     int xCoord, yCoord;
 
-    public RecordGameOverlay() throws IOException, Exception {
-        windowDimension = MainWindow.windowDimension;
-        mainWindow = ButtonListenerFactory.getMainWindow();
-        team = RecordGameMenu.teamName;
-        teamRegion = RecordGameMenu.teamRegion;
+    public RecordGameOverlay(String team, String teamRegion, Dimension windowDimension, MainWindow parentFrame) throws IOException, Exception {
+        this.windowDimension = windowDimension;
+        this.team = team;
+        this.teamRegion = teamRegion;
+        this.parentFrame = parentFrame;
 
         addTeamToDatabase();
-        gameName = DatabaseManager.addGameToGamesTable(team);
+        gameName = DatabaseManager.addGameToGamesTable(this.team);
 
         labelHoldingPanel = new JPanel();
-        mainWindow.addKeyListener(this);
+        parentFrame.addKeyListener(this);
 
         labelHoldingPanel.setLayout(new FlowLayout());
         labelHoldingPanel.setPreferredSize(windowDimension);
@@ -53,7 +53,7 @@ public class RecordGameOverlay extends JPanel implements KeyListener {
         //setting layout to null so the GUI doesn't override where we tell images to go
         labelHoldingPanel.setLayout(null);
 
-        mainWindow.addMenu(labelHoldingPanel);
+        parentFrame.addMenu(labelHoldingPanel);
         //listens for mouse clicks and attempts to place icon at mouse click location
         labelHoldingPanel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {

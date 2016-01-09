@@ -10,14 +10,14 @@ import java.util.ArrayList;
  */
 public class ReviewGamesMenu extends TransparentOverlayBaseClass {
 
-    ArrayList<String> listOfGames;
-    String selectedGame;
-    JList<String> games;
+    private ArrayList<String> listOfGames;
+    public static String selectedGame;
+    private JList<String> games;
 
 
     public ReviewGamesMenu(final Dimension windowDimension, MainWindow originalParentFrame){
-        super(windowDimension, originalParentFrame);
-        super.setParentFrame(originalParentFrame);
+        super(MainWindow.windowDimension, ButtonListenerFactory.getMainWindow());
+        super.setParentFrame(ButtonListenerFactory.getMainWindow());
 
         try{
             listOfGames = DatabaseManager.getListOfRecordedGames();
@@ -42,7 +42,7 @@ public class ReviewGamesMenu extends TransparentOverlayBaseClass {
                 parentFrame.removeMenu();
 
                 try{
-                    new ReviewGameOverlay(selectedGame, windowDimension, parentFrame);
+                    new ReviewGameOverlay();
                 }catch (Exception e1){System.out.println("GetGamesMenu " + e1);}
             }
         };

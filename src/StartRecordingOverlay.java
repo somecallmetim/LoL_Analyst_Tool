@@ -13,15 +13,14 @@ public class StartRecordingOverlay extends TransparentOverlayBaseClass {
     Dimension buttonSize = new Dimension(180, 30);
     String team, teamRegion;
 
-    MainWindow parentFrame;
-    Dimension windowDimension;
+    MainWindow mainWindow;
 
-    public StartRecordingOverlay (String team, String teamRegion, Dimension windowDimension, MainWindow parentFrame){
-        super(windowDimension, parentFrame);
-        this.team = team;
-        this.teamRegion = teamRegion;
-        this.windowDimension = windowDimension;
-        this.parentFrame = parentFrame;
+
+    public StartRecordingOverlay (){
+        super(MainWindow.windowDimension, ButtonListenerFactory.getMainWindow());
+        mainWindow = ButtonListenerFactory.getMainWindow();
+        this.team = RecordGameMenu.teamName;
+        this.teamRegion = RecordGameMenu.teamRegion;
 
         ButtonListener buttonListener = new ButtonListener();
 
@@ -35,13 +34,13 @@ public class StartRecordingOverlay extends TransparentOverlayBaseClass {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == startRecording){
-                parentFrame.removeMenu();
+                mainWindow.removeMenu();
                 try {
-                    recordGameOverlay = new RecordGameOverlay(team, teamRegion, windowDimension, parentFrame);
+                    recordGameOverlay = new RecordGameOverlay();
                 } catch (Exception exception){
                     System.out.println("StartRecordingOverlay problem: " + exception);
                 }
-                parentFrame.addMenu(recordGameOverlay);
+                mainWindow.addMenu(recordGameOverlay);
             }
         }
     }

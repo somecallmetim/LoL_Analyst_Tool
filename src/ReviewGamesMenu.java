@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
@@ -13,11 +11,15 @@ public class ReviewGamesMenu extends TransparentOverlayBaseClass {
     ArrayList<String> listOfGames;
     String selectedGame;
     JList<String> games;
+    ButtonListener buttonListener;
+    JButton backButton;
 
+    ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
 
     public ReviewGamesMenu(final Dimension windowDimension, MainWindow originalParentFrame){
         super(windowDimension, originalParentFrame);
         super.setParentFrame(originalParentFrame);
+        buttonListener = new ButtonListener();
 
         try{
             listOfGames = DatabaseManager.getListOfRecordedGames();
@@ -47,7 +49,22 @@ public class ReviewGamesMenu extends TransparentOverlayBaseClass {
             }
         };
         games.addMouseListener(mouseListener);
+        backButton = new JButton("Back");
+        backButton.addActionListener(buttonListener);
+        this.add(backButton);
 
+        screenOverlayStack.push(this);
+
+    }
+
+    private class ButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e){
+            if (e.getSource() == backButton){
+                parentFrame.removeMenu();
+                parentFrame.addMenu(screenOverlayStack.pop());
+            }
+        }
     }
 }
 

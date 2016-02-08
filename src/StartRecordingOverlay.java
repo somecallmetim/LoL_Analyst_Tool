@@ -8,13 +8,15 @@ import java.awt.event.ActionListener;
  */
 public class StartRecordingOverlay extends TransparentOverlayBaseClass {
 
-    JButton startRecording;
+    JButton startRecording, backButton;
     RecordGameOverlay recordGameOverlay;
     Dimension buttonSize = new Dimension(180, 30);
     String team, teamRegion;
 
     MainWindow parentFrame;
     Dimension windowDimension;
+
+    ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
 
     public StartRecordingOverlay (String team, String teamRegion, Dimension windowDimension, MainWindow parentFrame){
         super(windowDimension, parentFrame);
@@ -29,6 +31,13 @@ public class StartRecordingOverlay extends TransparentOverlayBaseClass {
         startRecording.addActionListener(buttonListener);
         startRecording.setPreferredSize(buttonSize);
         this.add(startRecording);
+
+        backButton = new JButton("Back");
+        backButton.addActionListener(buttonListener);
+        backButton.setPreferredSize(buttonSize);
+        this.add(backButton);
+
+        screenOverlayStack.push(this);
     }
 
     private class ButtonListener implements ActionListener {
@@ -42,6 +51,9 @@ public class StartRecordingOverlay extends TransparentOverlayBaseClass {
                     System.out.println("StartRecordingOverlay problem: " + exception);
                 }
                 parentFrame.addMenu(recordGameOverlay);
+            }else if (e.getSource() == backButton){
+                parentFrame.removeMenu();
+                parentFrame.addMenu(screenOverlayStack.pop());
             }
         }
     }

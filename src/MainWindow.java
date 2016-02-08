@@ -53,6 +53,11 @@ public class MainWindow extends JFrame {
         mainLayeredPane.add(currentMenu, JLayeredPane.PALETTE_LAYER);
     }
 
+    public void addMenu(JPanel newMenu, Integer layer){
+        currentMenu = newMenu;
+        mainLayeredPane.add(currentMenu, layer);
+    }
+
     public void removeMenu(){
         mainLayeredPane.remove(currentMenu);
         mainWindow.validate();

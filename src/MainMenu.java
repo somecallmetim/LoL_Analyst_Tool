@@ -17,6 +17,8 @@ public class MainMenu extends TransparentOverlayBaseClass {
     Dimension windowDimension;
     MainWindow parentFrame;
 
+    ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
+
 
 
     public MainMenu(Dimension windowDimension, MainWindow parentFrame){
@@ -39,6 +41,8 @@ public class MainMenu extends TransparentOverlayBaseClass {
         reviewRecordedGames.addActionListener(buttonListener);
         reviewRecordedGames.setPreferredSize(buttonSize);
         this.add(reviewRecordedGames);
+
+        screenOverlayStack.push(this);
 
 
 

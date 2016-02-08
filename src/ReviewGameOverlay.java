@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -13,14 +15,19 @@ public class ReviewGameOverlay extends TransparentOverlayBaseClass {
     Object[][] gameResults;
     Object[] eventHolder;
     JLabel event;
+    JButton backButton;
     BufferedImage icon;
     Boolean invalidEvent = false;
+    ButtonListener buttonListener;
     long time;
     int xCoord, yCoord;
+
+    ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
 
 
     public ReviewGameOverlay(String gameName,Dimension windowDimension, MainWindow parentFrame)throws Exception{
         super(windowDimension, parentFrame);
+        buttonListener = new ButtonListener();
 
         this.setLayout(null);
 
@@ -77,8 +84,27 @@ public class ReviewGameOverlay extends TransparentOverlayBaseClass {
         event.setVisible(false);
         this.add(event);
 
+
+
+        backButton = new JButton("Back");
+        backButton.addActionListener(buttonListener);
+        backButton.setBounds(410, 10, 180, 30);
+        this.add(backButton);
+
         this.validate();
         this.repaint();
+
+        screenOverlayStack.push(this);
+    }
+
+    private class ButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e){
+            if (e.getSource() == backButton){
+                parentFrame.removeMenu();
+                parentFrame.addMenu(screenOverlayStack.pop());
+            }
+        }
     }
 }
 

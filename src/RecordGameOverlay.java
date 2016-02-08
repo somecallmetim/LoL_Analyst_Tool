@@ -1,16 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
  * Created by timbauer on 12/27/15.
  */
-public class RecordGameOverlay extends JPanel implements KeyListener {
+public class RecordGameOverlay extends TransparentOverlayBaseClass implements KeyListener {
 
     long timeEventOccurred = 0;
     String top = "top warded";
@@ -24,12 +21,18 @@ public class RecordGameOverlay extends JPanel implements KeyListener {
     Dimension windowDimension;
 
     JPanel labelHoldingPanel;
+    JButton backButton;
+    ButtonListener buttonListener;
     MainWindow parentFrame;
 
 
     int xCoord, yCoord;
 
+    ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
+
     public RecordGameOverlay(String team, String teamRegion, Dimension windowDimension, MainWindow parentFrame) throws IOException, Exception {
+        buttonListener = new ButtonListener();
+
         this.windowDimension = windowDimension;
         this.team = team;
         this.teamRegion = teamRegion;
@@ -48,6 +51,10 @@ public class RecordGameOverlay extends JPanel implements KeyListener {
         labelHoldingPanel.setOpaque(false);
 
 
+        backButton = new JButton("Back");
+        backButton.addActionListener(buttonListener);
+        backButton.setBounds(410, 10, 180, 30);
+        this.add(backButton);
 
 
         //setting layout to null so the GUI doesn't override where we tell images to go
@@ -86,6 +93,10 @@ public class RecordGameOverlay extends JPanel implements KeyListener {
                 }
             }
         });
+
+
+
+        screenOverlayStack.push(this);
 
     }
 
@@ -139,6 +150,16 @@ public class RecordGameOverlay extends JPanel implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    private class ButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e){
+            if (e.getSource() == backButton){
+                parentFrame.removeMenu();
+                parentFrame.addMenu(screenOverlayStack.pop());
+            }
+        }
     }
 }
 

@@ -11,12 +11,14 @@ public class RecordGameMenu extends TransparentOverlayBaseClass {
     JTextField teamNameTextBox;
     JComboBox teamNameFromDb;
     JComboBox<String> teamRegionComboBox;
-    JButton goToRecordingMapWindow;
+    JButton goToRecordingMapWindow, backButton;
     String teamName, teamRegion;
     StartRecordingOverlay startRecordingOverlay;
 
     MainWindow parentFrame;
     Dimension windowDimension;
+
+    ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
 
     public RecordGameMenu(Dimension windowDimension, MainWindow parentFrame){
         super(windowDimension, parentFrame);
@@ -40,6 +42,11 @@ public class RecordGameMenu extends TransparentOverlayBaseClass {
         this.add(teamRegionComboBox);
         this.add(goToRecordingMapWindow);
 
+        backButton = new JButton("Back");
+        backButton.addActionListener(buttonListener);
+        this.add(backButton);
+
+        screenOverlayStack.push(this);
 
 
     }
@@ -59,6 +66,9 @@ public class RecordGameMenu extends TransparentOverlayBaseClass {
                 }
                 parentFrame.addMenu(startRecordingOverlay);
 
+            }else if (e.getSource() == backButton){
+                parentFrame.removeMenu();
+                parentFrame.addMenu(screenOverlayStack.pop());
             }
         }
     }

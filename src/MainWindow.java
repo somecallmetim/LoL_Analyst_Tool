@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 /**
  * Created by timbauer on 12/7/15.
@@ -9,7 +8,7 @@ public class MainWindow extends JFrame {
 
     private static MainWindow mainWindow = null;
     static BackgroundMapPanel backgroundMapPanel;
-    static JPanel currentMenu;
+    static JPanel currentOverlay;
     static JLayeredPane mainLayeredPane;
     static int width = 1000;
     static int height = 800;
@@ -25,7 +24,7 @@ public class MainWindow extends JFrame {
 
             backgroundMapPanel = new BackgroundMapPanel(ImageManager.SrMap);
             mainLayeredPane = new JLayeredPane();
-            currentMenu = new MainMenu(windowDimension, mainWindow);
+
 
             backgroundMapPanel.setPreferredSize(windowDimension);
             backgroundMapPanel.setBounds(0, 0, width, height);
@@ -41,25 +40,36 @@ public class MainWindow extends JFrame {
             mainWindow.getContentPane().add(mainLayeredPane);
 
             mainLayeredPane.add(backgroundMapPanel, JLayeredPane.DEFAULT_LAYER);
-            mainLayeredPane.add(currentMenu, JLayeredPane.PALETTE_LAYER);
+
+            currentOverlay = new MainMenu(windowDimension, mainWindow);
+            mainLayeredPane.add(currentOverlay, JLayeredPane.PALETTE_LAYER);
 
         }
 
         return mainWindow;
     }
 
-    public void addMenu(JPanel newMenu){
-        currentMenu = newMenu;
-        mainLayeredPane.add(currentMenu, JLayeredPane.PALETTE_LAYER);
+    public void addOverlay(JPanel newOverlay){
+        currentOverlay = newOverlay;
+        mainLayeredPane.add(currentOverlay, JLayeredPane.PALETTE_LAYER);
+        mainWindow.validate();
+        mainWindow.repaint();
     }
 
-    public void addMenu(JPanel newMenu, Integer layer){
-        currentMenu = newMenu;
-        mainLayeredPane.add(currentMenu, layer);
+    public void addOverlay(JPanel newOverlay, Integer layer){
+        mainLayeredPane.add(newOverlay, layer);
+        mainWindow.validate();
+        mainWindow.repaint();
     }
 
-    public void removeMenu(){
-        mainLayeredPane.remove(currentMenu);
+    public void removeCurrentScreenOverlay(){
+        mainLayeredPane.remove(currentOverlay);
+        mainWindow.validate();
+        mainWindow.repaint();
+    }
+
+    public void removeOverlay(JPanel overlay){
+        mainLayeredPane.remove(overlay);
         mainWindow.validate();
         mainWindow.repaint();
     }

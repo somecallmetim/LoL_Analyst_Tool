@@ -20,7 +20,8 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
 
     Dimension windowDimension;
 
-    JPanel labelHoldingPanel;
+    JPanel mapMarkerHoldingPanel;
+    MenuBarTopSide menuBarTopSide;
     JButton backButton;
     ButtonListener buttonListener;
     MainWindow parentFrame;
@@ -41,28 +42,29 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
         addTeamToDatabase();
         gameName = DatabaseManager.addGameToGamesTable(this.team);
 
-        labelHoldingPanel = new JPanel();
+        mapMarkerHoldingPanel = new JPanel();
+        menuBarTopSide = new MenuBarTopSide(windowDimension, parentFrame);
         parentFrame.addKeyListener(this);
 
-        labelHoldingPanel.setLayout(new FlowLayout());
-        labelHoldingPanel.setPreferredSize(windowDimension);
-        labelHoldingPanel.setBounds(0, 0, (int)windowDimension.getWidth(), (int)windowDimension.getHeight());
-        labelHoldingPanel.setBackground(new Color(0, 0, 0, 0));
-        labelHoldingPanel.setOpaque(false);
+        //setting layout to null so the GUI doesn't override where we tell images to go
+        mapMarkerHoldingPanel.setLayout(null);
+        mapMarkerHoldingPanel.setPreferredSize(windowDimension);
+        mapMarkerHoldingPanel.setBounds(0, 0, (int)windowDimension.getWidth(), (int)windowDimension.getHeight());
+        mapMarkerHoldingPanel.setBackground(new Color(0, 0, 0, 0));
+        mapMarkerHoldingPanel.setOpaque(false);
 
 
         backButton = new JButton("Back");
         backButton.addActionListener(buttonListener);
-        backButton.setBounds(410, 10, 180, 30);
-        this.add(backButton);
+        menuBarTopSide.add(backButton);
 
 
-        //setting layout to null so the GUI doesn't override where we tell images to go
-        labelHoldingPanel.setLayout(null);
 
-        parentFrame.addMenu(labelHoldingPanel);
+        parentFrame.addOverlay(mapMarkerHoldingPanel);
+        parentFrame.addOverlay(menuBarTopSide, JLayeredPane.MODAL_LAYER);
+
         //listens for mouse clicks and attempts to place icon at mouse click location
-        labelHoldingPanel.addMouseListener(new MouseAdapter() {
+        this.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 xCoord = e.getX()-12;
                 yCoord = e.getY()-25;
@@ -78,13 +80,13 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
                 JLabel marker = new JLabel(new ImageIcon(currentIconSelected));
 
                 //this code tries to add map icon to map
-                labelHoldingPanel.add(marker);
+                mapMarkerHoldingPanel.add(marker);
                 Dimension size = marker.getPreferredSize();
                 marker.setBounds(xCoord, yCoord, size.width, size.height);
 
                 //redraws the map with new map icon on top
-                labelHoldingPanel.validate();
-                labelHoldingPanel.repaint();
+                mapMarkerHoldingPanel.validate();
+                mapMarkerHoldingPanel.repaint();
 
                 try{
                     DatabaseManager.addEntryToCurrentGameTable(gameName, whatOccurred, timeEventOccurred,xCoord, yCoord);
@@ -156,8 +158,19 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
         @Override
         public void actionPerformed(ActionEvent e){
             if (e.getSource() == backButton){
-                parentFrame.removeMenu();
-                parentFrame.addMenu(screenOverlayStack.pop());
+                //shouldn't need all these, but if top remove call isn't present, the previous screens buttons
+                //become unclickable. Since their at the top of the screen, this makes me wonder if the top
+                //menu bar is somehow not being completely removed (ie it's at on a higher tier on my
+                //layered pane and maybe it's blocking the buttons). If the second remove call isn't present,
+                //then the main overlay from this screen is never removed. The only one of these that's behaving as
+                //expected is the third remove call where removing it causes the top menu bar to completely remain
+                //intact including the back button. However, removing this call, while leaving the back button in place
+                //where it shouldn't be on the previous screen, still allows me to click on the buttons below it
+                //on the layered pane, which definitely puts a hole in my first theory
+                parentFrame.removeCurrentScreenOverlay();
+                parentFrame.removeOverlay(mapMarkerHoldingPanel);
+                parentFrame.removeOverlay(menuBarTopSide);
+                parentFrame.addOverlay(screenOverlayStack.pop());
             }
         }
     }

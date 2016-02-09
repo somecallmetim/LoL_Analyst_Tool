@@ -58,17 +58,17 @@ public class RecordGameMenu extends TransparentOverlayBaseClass {
 
                 teamName = teamNameTextBox.getText();
                 teamRegion = teamRegionComboBox.getSelectedItem().toString();
-                parentFrame.removeMenu();
+                parentFrame.removeCurrentScreenOverlay();
                 try{
                     startRecordingOverlay = new StartRecordingOverlay(teamName, teamRegion, windowDimension, parentFrame);
                 }catch (Exception exception){
                     System.out.println("Recording Map Menu\n" + exception);
                 }
-                parentFrame.addMenu(startRecordingOverlay);
+                parentFrame.addOverlay(startRecordingOverlay);
 
             }else if (e.getSource() == backButton){
-                parentFrame.removeMenu();
-                parentFrame.addMenu(screenOverlayStack.pop());
+                parentFrame.removeCurrentScreenOverlay();
+                parentFrame.addOverlay(screenOverlayStack.pop());
             }
         }
     }

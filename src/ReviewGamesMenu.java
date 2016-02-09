@@ -41,7 +41,7 @@ public class ReviewGamesMenu extends TransparentOverlayBaseClass {
             @Override
             public void mouseClicked(MouseEvent e) {
                 selectedGame = games.getSelectedValue();
-                parentFrame.removeMenu();
+                parentFrame.removeCurrentScreenOverlay();
 
                 try{
                     new ReviewGameOverlay(selectedGame, windowDimension, parentFrame);
@@ -61,8 +61,8 @@ public class ReviewGamesMenu extends TransparentOverlayBaseClass {
         @Override
         public void actionPerformed(ActionEvent e){
             if (e.getSource() == backButton){
-                parentFrame.removeMenu();
-                parentFrame.addMenu(screenOverlayStack.pop());
+                parentFrame.removeCurrentScreenOverlay();
+                parentFrame.addOverlay(screenOverlayStack.pop());
             }
         }
     }

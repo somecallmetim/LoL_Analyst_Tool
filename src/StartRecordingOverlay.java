@@ -44,16 +44,16 @@ public class StartRecordingOverlay extends TransparentOverlayBaseClass {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == startRecording){
-                parentFrame.removeMenu();
+                parentFrame.removeCurrentScreenOverlay();
                 try {
                     recordGameOverlay = new RecordGameOverlay(team, teamRegion, windowDimension, parentFrame);
                 } catch (Exception exception){
                     System.out.println("StartRecordingOverlay problem: " + exception);
                 }
-                parentFrame.addMenu(recordGameOverlay);
+                parentFrame.addOverlay(recordGameOverlay);
             }else if (e.getSource() == backButton){
-                parentFrame.removeMenu();
-                parentFrame.addMenu(screenOverlayStack.pop());
+                parentFrame.removeCurrentScreenOverlay();
+                parentFrame.addOverlay(screenOverlayStack.pop());
             }
         }
     }

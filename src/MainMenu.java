@@ -52,13 +52,13 @@ public class MainMenu extends TransparentOverlayBaseClass {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == recordNewGame){
-                parentFrame.removeMenu();
+                parentFrame.removeCurrentScreenOverlay();
                 recordingMapMenu = new RecordGameMenu(windowDimension, parentFrame);
-                parentFrame.addMenu(recordingMapMenu);
+                parentFrame.addOverlay(recordingMapMenu);
             }else if (e.getSource() == reviewRecordedGames){
-                parentFrame.removeMenu();
+                parentFrame.removeCurrentScreenOverlay();
                 reviewGamesMenu = new ReviewGamesMenu(windowDimension, parentFrame);
-                parentFrame.addMenu(reviewGamesMenu);
+                parentFrame.addOverlay(reviewGamesMenu);
             }
         }
     }

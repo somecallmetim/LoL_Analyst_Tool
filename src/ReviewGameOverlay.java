@@ -31,7 +31,7 @@ public class ReviewGameOverlay extends TransparentOverlayBaseClass {
 
         this.setLayout(null);
 
-        parentFrame.addMenu(this);
+        parentFrame.addOverlay(this);
 
         gameEventResults = DatabaseManager.getGameData(gameName);
 
@@ -101,8 +101,8 @@ public class ReviewGameOverlay extends TransparentOverlayBaseClass {
         @Override
         public void actionPerformed(ActionEvent e){
             if (e.getSource() == backButton){
-                parentFrame.removeMenu();
-                parentFrame.addMenu(screenOverlayStack.pop());
+                parentFrame.removeCurrentScreenOverlay();
+                parentFrame.addOverlay(screenOverlayStack.pop());
             }
         }
     }

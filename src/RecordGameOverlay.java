@@ -10,19 +10,20 @@ import java.io.IOException;
 public class RecordGameOverlay extends TransparentOverlayBaseClass implements KeyListener {
 
     long timeEventOccurred = 0;
-    String top = "top warded";
-    String mid = "mid warded";
-    String adc = "adc warded";
-    String supp = "support warded";
-    String jungle = "jungle warded";
+    String top = "<html><font color='white'>Q: Top Laner Ward</font></html>";
+    String mid = "<html><font color='white'>W: Mid Laner Ward</font></html>";
+    String adc = "<html><font color='white'>E: ADC Ward</font></html>";
+    String supp = "<html><font color='white'>R: Support Ward</font></html>";
+    String jungle = "<html><font color='white'>T: Jungler Ward</font></html>";
     String whatOccurred = jungle;
     String team, teamRegion, gameName;
 
     Dimension windowDimension;
 
     JPanel mapMarkerHoldingPanel;
-    MenuBarTopSide menuBarTopSide;
+    HorizontalMenuBar menuBarTopSide, bottomMenuBar;
     JButton backButton;
+    JLabel topMarker, midMarker, jungleMarker, adcMarker, supportMarker;
     ButtonListener buttonListener;
     MainWindow parentFrame;
 
@@ -43,7 +44,9 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
         gameName = DatabaseManager.addGameToGamesTable(this.team);
 
         mapMarkerHoldingPanel = new JPanel();
-        menuBarTopSide = new MenuBarTopSide(windowDimension, parentFrame);
+        menuBarTopSide = new HorizontalMenuBar(windowDimension, parentFrame);
+        bottomMenuBar = new HorizontalMenuBar(windowDimension, parentFrame);
+
         parentFrame.addKeyListener(this);
 
         //setting layout to null so the GUI doesn't override where we tell images to go
@@ -58,10 +61,27 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
         backButton.addActionListener(buttonListener);
         menuBarTopSide.add(backButton);
 
+        bottomMenuBar.setBounds(0, 740, parentFrame.getWidth(), bottomMenuBar.getHeight());
+        bottomMenuBar.setLayout(new FlowLayout());
+
+
+        topMarker = new JLabel(top, new ImageIcon(ImageManager.topIcon), JLabel.LEFT);
+        midMarker = new JLabel(mid, new ImageIcon(ImageManager.midIcon), JLabel.LEFT);
+        adcMarker = new JLabel(adc, new ImageIcon(ImageManager.adcIcon), JLabel.LEFT);
+        supportMarker = new JLabel(supp, new ImageIcon(ImageManager.suppIcon), JLabel.LEFT);
+        jungleMarker = new JLabel(jungle, new ImageIcon(ImageManager.jungleIcon), JLabel.LEFT);
+
+        bottomMenuBar.add(topMarker);
+        bottomMenuBar.add(midMarker);
+        bottomMenuBar.add(adcMarker);
+        bottomMenuBar.add(supportMarker);
+        bottomMenuBar.add(jungleMarker);
+
 
 
         parentFrame.addOverlay(mapMarkerHoldingPanel);
         parentFrame.addOverlay(menuBarTopSide, JLayeredPane.MODAL_LAYER);
+        parentFrame.addOverlay(bottomMenuBar, JLayeredPane.MODAL_LAYER);
 
         //listens for mouse clicks and attempts to place icon at mouse click location
         this.addMouseListener(new MouseAdapter() {

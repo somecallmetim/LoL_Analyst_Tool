@@ -9,6 +9,7 @@ public class ScreenOverlayStack extends Stack<JPanel> {
 
     private static ScreenOverlayStack screenOverlayStack = new ScreenOverlayStack();
     private JPanel currentScreen = null;
+    private JPanel holdingVariable;
 
     private ScreenOverlayStack() {
     }
@@ -30,8 +31,15 @@ public class ScreenOverlayStack extends Stack<JPanel> {
 
     @Override
     public JPanel pop(){
-        currentScreen = super.pop();
-        return currentScreen;
+        if(!this.isEmpty()){
+            currentScreen = super.pop();
+            return currentScreen;
+        }else {
+            holdingVariable = currentScreen;
+            currentScreen = null;
+            return holdingVariable;
+        }
+
     }
 
 

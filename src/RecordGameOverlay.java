@@ -22,7 +22,7 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
 
     JPanel mapMarkerHoldingPanel;
     HorizontalMenuBar menuBarTopSide, bottomMenuBar;
-    JButton backButton;
+    JButton backButton, exitToMainMenu;
     JLabel topMarker, midMarker, jungleMarker, adcMarker, supportMarker;
     ButtonListener buttonListener;
     MainWindow parentFrame;
@@ -59,7 +59,10 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
 
         backButton = new JButton("Back");
         backButton.addActionListener(buttonListener);
+        exitToMainMenu = new JButton("Exit to Main Menu");
+        exitToMainMenu.addActionListener(buttonListener);
         menuBarTopSide.add(backButton);
+        menuBarTopSide.add(exitToMainMenu);
 
         bottomMenuBar.setBounds(0, 740, parentFrame.getWidth(), bottomMenuBar.getHeight());
         bottomMenuBar.setLayout(new FlowLayout());
@@ -175,6 +178,10 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
     }
 
     private class ButtonListener implements ActionListener {
+
+        //JPanel holdingVariable;
+        ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
+
         @Override
         public void actionPerformed(ActionEvent e){
             if (e.getSource() == backButton){
@@ -190,7 +197,16 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
                 parentFrame.removeCurrentScreenOverlay();
                 parentFrame.removeOverlay(mapMarkerHoldingPanel);
                 parentFrame.removeOverlay(menuBarTopSide);
+                parentFrame.removeOverlay(bottomMenuBar);
                 parentFrame.addOverlay(screenOverlayStack.pop());
+            }else if (e.getSource() == exitToMainMenu){
+                parentFrame.removeCurrentScreenOverlay();
+                parentFrame.removeOverlay(mapMarkerHoldingPanel);
+                parentFrame.removeOverlay(menuBarTopSide);
+                parentFrame.removeOverlay(bottomMenuBar);
+                //while(!(holdingVariable = screenOverlayStack.pop()).equals(MainMenu.class)){}
+                //parentFrame.addOverlay(holdingVariable);
+                parentFrame.addOverlay(new MainMenu(windowDimension, parentFrame));
             }
         }
     }

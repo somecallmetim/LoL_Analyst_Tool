@@ -73,4 +73,10 @@ public class MainWindow extends JFrame {
         mainWindow.validate();
         mainWindow.repaint();
     }
+
+    public void removeAllOverlays(){
+        mainLayeredPane.removeAll();
+        mainWindow.validate();
+        mainWindow.repaint();
+    }
 }

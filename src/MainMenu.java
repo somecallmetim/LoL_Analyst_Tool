@@ -11,8 +11,8 @@ import java.awt.event.ActionListener;
  */
 public class MainMenu extends TransparentOverlayBaseClass {
 
-    JButton recordNewGame, reviewRecordedGames;
-    JPanel recordingMapMenu, reviewGamesMenu;
+    JButton recordNewGame, reviewRecordedGames, manageTeamsByRegion;
+    JPanel recordingMapMenu, reviewGamesMenu, manageTeamsMenu;
     Dimension buttonSize = new Dimension(180, 30);
     Dimension windowDimension;
     MainWindow parentFrame;
@@ -42,6 +42,12 @@ public class MainMenu extends TransparentOverlayBaseClass {
         reviewRecordedGames.setPreferredSize(buttonSize);
         this.add(reviewRecordedGames);
 
+        manageTeamsByRegion = new JButton("Manage Teams By Region");
+        manageTeamsByRegion.addActionListener(buttonListener);
+        manageTeamsByRegion.setPreferredSize(buttonSize);
+        this.add(manageTeamsByRegion);
+
+
         screenOverlayStack.push(this);
 
 
@@ -59,6 +65,11 @@ public class MainMenu extends TransparentOverlayBaseClass {
                 parentFrame.removeCurrentScreenOverlay();
                 reviewGamesMenu = new ReviewGamesMenu(windowDimension, parentFrame);
                 parentFrame.addOverlay(reviewGamesMenu);
+            } else if (e.getSource() == manageTeamsByRegion){
+                parentFrame.removeCurrentScreenOverlay();
+                manageTeamsMenu = new ManageTeamsMenu(windowDimension, parentFrame);
+                parentFrame.addOverlay(manageTeamsMenu);
+
             }
         }
     }

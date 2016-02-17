@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 
 /**
  * Created by timbauer on 1/7/16.
@@ -12,16 +13,18 @@ public class StartRecordingOverlay extends TransparentOverlayBaseClass {
     RecordGameOverlay recordGameOverlay;
     Dimension buttonSize = new Dimension(180, 30);
     String team, teamRegion;
+    Date gameDate;
 
     MainWindow parentFrame;
     Dimension windowDimension;
 
     ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
 
-    public StartRecordingOverlay (String team, String teamRegion, Dimension windowDimension, MainWindow parentFrame){
+    public StartRecordingOverlay (String team, String teamRegion,  Date gameDate, Dimension windowDimension, MainWindow parentFrame){
         super(windowDimension, parentFrame);
         this.team = team;
         this.teamRegion = teamRegion;
+        this.gameDate = gameDate;
         this.windowDimension = windowDimension;
         this.parentFrame = parentFrame;
 
@@ -46,7 +49,7 @@ public class StartRecordingOverlay extends TransparentOverlayBaseClass {
             if(e.getSource() == startRecording){
                 parentFrame.removeCurrentScreenOverlay();
                 try {
-                    recordGameOverlay = new RecordGameOverlay(team, teamRegion, windowDimension, parentFrame);
+                    recordGameOverlay = new RecordGameOverlay(team, teamRegion, gameDate, windowDimension, parentFrame);
                 } catch (Exception exception){
                     System.out.println("StartRecordingOverlay problem: " + exception);
                 }

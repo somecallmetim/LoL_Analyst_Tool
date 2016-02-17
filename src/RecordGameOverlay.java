@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.sql.Date;
 
 /**
  * Created by timbauer on 12/27/15.
@@ -17,6 +18,7 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
     String jungle = "<html><font color='white'>T: Jungler Ward</font></html>";
     String whatOccurred = jungle;
     String team, teamRegion, gameName;
+    Date sqlDate;
 
     Dimension windowDimension;
 
@@ -32,16 +34,16 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
 
     ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
 
-    public RecordGameOverlay(String team, String teamRegion, Dimension windowDimension, MainWindow parentFrame) throws IOException, Exception {
+    public RecordGameOverlay(String team, String teamRegion, Date sqlDate, Dimension windowDimension, MainWindow parentFrame) throws IOException, Exception {
         buttonListener = new ButtonListener();
 
         this.windowDimension = windowDimension;
         this.team = team;
         this.teamRegion = teamRegion;
+        this.sqlDate = sqlDate;
         this.parentFrame = parentFrame;
 
-        addTeamToDatabase();
-        gameName = DatabaseManager.addGameToGamesTable(this.team);
+        gameName = DatabaseManager.addGameToGamesTable(this.team, this.sqlDate);
 
         mapMarkerHoldingPanel = new JPanel();
         menuBarTopSide = new HorizontalMenuBar(windowDimension, parentFrame);
@@ -112,7 +114,7 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
                 mapMarkerHoldingPanel.repaint();
 
                 try{
-                    DatabaseManager.addEntryToCurrentGameTable(gameName, whatOccurred, timeEventOccurred,xCoord, yCoord);
+                    DatabaseManager.addEntryToCurrentGameTable(gameName, whatOccurred, timeEventOccurred, xCoord, yCoord);
                 }catch (Exception e2){
                     System.out.println(e2);
                 }
@@ -125,12 +127,6 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
 
     }
 
-    private void addTeamToDatabase() throws Exception{
-        boolean isTeamAlreadyEntered = DatabaseManager.checkIfTeamIsEntered(team);
-        if(!isTeamAlreadyEntered){
-            DatabaseManager.addNewTeam(team, teamRegion);
-        }
-    }
 
     @Override
     public void keyTyped(KeyEvent e) {

@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -103,11 +100,11 @@ public class DatabaseManager {
         return (int)(Math.random()*10000 + 1);
     }
 
-    public static String addGameToGamesTable(String teamName) throws Exception{
+    public static String addGameToGamesTable(String teamName, Date gameDate) throws Exception{
         int numResults = 0;
 
         Boolean idInUse = true;
-
+        //this dowhile loop ensures we get a unique game id number for our table
         do {
             game_iD = randomNumber();
 
@@ -124,10 +121,11 @@ public class DatabaseManager {
             }
         }while(idInUse);
 
-        String toInsert = "INSERT INTO gamesTable (game_Id, teamName) VALUES (?, ?)";
+        String toInsert = "INSERT INTO gamesTable (game_Id, teamName, game_date)VALUES (?, ?, ?)";
         PreparedStatement insert = conn.prepareStatement(toInsert);
         insert.setInt(1, game_iD);
         insert.setString(2, teamName);
+        insert.setDate(3, gameDate);
         insert.executeUpdate();
 
 

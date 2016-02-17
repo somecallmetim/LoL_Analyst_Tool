@@ -19,6 +19,7 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
     String whatOccurred = jungle;
     String team, teamRegion, gameName;
     Date sqlDate;
+    int numOfGameInCurrentSeries;
 
     Dimension windowDimension;
 
@@ -34,16 +35,17 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
 
     ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
 
-    public RecordGameOverlay(String team, String teamRegion, Date sqlDate, Dimension windowDimension, MainWindow parentFrame) throws IOException, Exception {
+    public RecordGameOverlay(String team, String teamRegion, Date sqlDate, int numOfGameInCurrentSeries, Dimension windowDimension, MainWindow parentFrame) throws IOException, Exception {
         buttonListener = new ButtonListener();
 
         this.windowDimension = windowDimension;
         this.team = team;
         this.teamRegion = teamRegion;
         this.sqlDate = sqlDate;
+        this.numOfGameInCurrentSeries = numOfGameInCurrentSeries;
         this.parentFrame = parentFrame;
 
-        gameName = DatabaseManager.addGameToGamesTable(this.team, this.sqlDate);
+        gameName = DatabaseManager.addGameToGamesTable(this.team, this.sqlDate, this.numOfGameInCurrentSeries);
 
         mapMarkerHoldingPanel = new JPanel();
         menuBarTopSide = new HorizontalMenuBar(windowDimension, parentFrame);

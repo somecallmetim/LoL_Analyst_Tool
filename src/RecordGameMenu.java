@@ -12,10 +12,11 @@ import java.util.ArrayList;
 public class RecordGameMenu extends TransparentOverlayBaseClass {
 
     JTextField dateEntryBox;
-    JComboBox<String> regionComboBox, teamNameFromDb, monthComboBox;
+    JComboBox<String> regionComboBox, teamNameFromDb, monthComboBox, gameNumber;
     JComboBox<Integer> dayComboBox, yearComboBox;
     JButton goToRecordingMapWindow, backButton;
     String teamName, teamRegion;
+    int numOfGameInCurrentSeries;
     ArrayList<String> listOfTeams;
     String[] teamList;
     StartRecordingOverlay startRecordingOverlay;
@@ -33,6 +34,8 @@ public class RecordGameMenu extends TransparentOverlayBaseClass {
             27, 28, 29, 30, 31};
 
     final Integer[] years = {2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020};
+
+    final String[] numberOfGameInCurrentSeries = {"Game 1", "Game 2", "Game 3", "Game 4", "Game 5"};
 
     ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
 
@@ -56,6 +59,8 @@ public class RecordGameMenu extends TransparentOverlayBaseClass {
         dayComboBox = new JComboBox<>(days);
         monthComboBox = new JComboBox<>(months);
         yearComboBox = new JComboBox<>(years);
+
+        gameNumber = new JComboBox<>(numberOfGameInCurrentSeries);
 
 
         convertDateToComboBoxes(currentDate);
@@ -136,10 +141,13 @@ public class RecordGameMenu extends TransparentOverlayBaseClass {
                 teamName = teamNameFromDb.getSelectedItem().toString();
                 teamRegion = regionComboBox.getSelectedItem().toString();
 
+                numOfGameInCurrentSeries = gameNumber.getSelectedIndex() + 1;
+
                 Date sqlDate = convertStringToSqlDate(month, day, year);
                 parentFrame.removeCurrentScreenOverlay();
                 try{
-                    startRecordingOverlay = new StartRecordingOverlay(teamName, teamRegion, sqlDate, windowDimension, parentFrame);
+                    startRecordingOverlay = new StartRecordingOverlay(teamName, teamRegion, sqlDate, numOfGameInCurrentSeries,
+                            windowDimension, parentFrame);
                 }catch (Exception exception){
                     System.out.println("Recording Map Menu\n" + exception);
                 }
@@ -157,6 +165,9 @@ public class RecordGameMenu extends TransparentOverlayBaseClass {
                 }catch (Exception exception){}
                 try{
                     remove(yearComboBox);
+                }catch (Exception exception){}
+                try{
+                    remove(gameNumber);
                 }catch (Exception exception){}
                 parentFrame.removeCurrentScreenOverlay();
                 parentFrame.addOverlay(screenOverlayStack.pop());
@@ -194,6 +205,7 @@ public class RecordGameMenu extends TransparentOverlayBaseClass {
                 add(monthComboBox);
                 add(dayComboBox);
                 add(yearComboBox);
+                add(gameNumber);
                 add(goToRecordingMapWindow);
                 add(backButton);
 

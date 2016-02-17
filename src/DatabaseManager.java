@@ -51,7 +51,7 @@ public class DatabaseManager {
 
         try {
             PreparedStatement create = conn.prepareStatement("CREATE TABLE IF NOT EXISTS gamesTable (game_Id INT NOT NULL PRIMARY KEY, " +
-                    "teamName VARCHAR(255) NOT NULL, game_date DATE, patch DECIMAL)");
+                    "teamName VARCHAR(255) NOT NULL, game_date DATE, game_series_number INT, patch DECIMAL)");
 
             create.executeUpdate();
 
@@ -100,7 +100,7 @@ public class DatabaseManager {
         return (int)(Math.random()*10000 + 1);
     }
 
-    public static String addGameToGamesTable(String teamName, Date gameDate) throws Exception{
+    public static String addGameToGamesTable(String teamName, Date gameDate, int numOfGameInCurrentSeries) throws Exception{
         int numResults = 0;
 
         Boolean idInUse = true;
@@ -121,11 +121,12 @@ public class DatabaseManager {
             }
         }while(idInUse);
 
-        String toInsert = "INSERT INTO gamesTable (game_Id, teamName, game_date)VALUES (?, ?, ?)";
+        String toInsert = "INSERT INTO gamesTable (game_Id, teamName, game_date, game_series_number)VALUES (?, ?, ?, ?)";
         PreparedStatement insert = conn.prepareStatement(toInsert);
         insert.setInt(1, game_iD);
         insert.setString(2, teamName);
         insert.setDate(3, gameDate);
+        insert.setInt(4, numOfGameInCurrentSeries);
         insert.executeUpdate();
 
 

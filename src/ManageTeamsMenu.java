@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Created by timbauer on 2/15/16.
@@ -12,7 +13,9 @@ public class ManageTeamsMenu extends TransparentOverlayBaseClass {
 
     JButton addTeam, dropTeam, backToMainMenu, clearWithoutSaving, saveTeamData;
     JTextField teamNameTextBox;
-    JComboBox<String> teamRegionComboBox;
+    JComboBox<String> regionComboBox, listOfTeamsComboBox;
+
+    ArrayList<String> listOfTeams;
 
     JPanel recordingMapMenu, reviewGamesMenu;
     Dimension buttonSize = new Dimension(180, 30);
@@ -40,9 +43,9 @@ public class ManageTeamsMenu extends TransparentOverlayBaseClass {
         ComboBoxListener comboBoxListener = new ComboBoxListener(majorRegions);
 
 
-        teamRegionComboBox = new JComboBox<String>(majorRegions);
-        teamRegionComboBox.addActionListener(comboBoxListener);
-        this.add(teamRegionComboBox);
+        regionComboBox = new JComboBox<String>(majorRegions);
+        regionComboBox.addActionListener(comboBoxListener);
+        this.add(regionComboBox);
 
         teamNameTextBox = new JTextField("Team Name");
 
@@ -73,8 +76,6 @@ public class ManageTeamsMenu extends TransparentOverlayBaseClass {
 
         screenOverlayStack.push(this);
 
-
-
     }
 
     private void addTeamToDatabase(String team, String teamRegion) throws Exception{
@@ -89,11 +90,21 @@ public class ManageTeamsMenu extends TransparentOverlayBaseClass {
     }
 
     private void setScreenToAddOrDropTeam(){
-        remove(teamNameTextBox);
-        remove(saveTeamData);
-        remove(clearWithoutSaving);
+        try{
+            remove(teamNameTextBox);
+        }catch (Exception exception){}
+        try{
+            remove(saveTeamData);
+        }catch (Exception exception){}
+        try{
+            remove(clearWithoutSaving);
+        }catch (Exception exception){}
+        try{
+            remove(listOfTeamsComboBox);
+        }catch (Exception exception){}
 
-        add(teamRegionComboBox);
+
+        add(regionComboBox);
         add(addTeam);
         add(dropTeam);
         add(backToMainMenu);
@@ -110,9 +121,14 @@ public class ManageTeamsMenu extends TransparentOverlayBaseClass {
         public void actionPerformed(ActionEvent e){
             if(e.getSource() == addTeam){
 
+                entryModeIsSetForAddingATeam = true;
+
                 remove(addTeam);
                 remove(dropTeam);
                 remove(backToMainMenu);
+
+                teamNameTextBox.setText("Team Name");
+                saveTeamData.setText("Add Team");
 
                 add(teamNameTextBox);
                 add(saveTeamData);
@@ -123,10 +139,28 @@ public class ManageTeamsMenu extends TransparentOverlayBaseClass {
 
             }else if (e.getSource() == dropTeam){
 
+                entryModeIsSetForAddingATeam = false;
+                region = regionComboBox.getSelectedItem().toString();
+
+                try{
+                    listOfTeams = DatabaseManager.getListOfTeamsByRegion(region);
+                }catch (Exception exception){
+                    System.out.println(exception + " problem in ManageTeamsMenu in ButtonListener at dropTeam");
+                }
+
+                String[] teamList = new String[listOfTeams.size()];
+                
+                teamList = listOfTeams.toArray(teamList);
+
+                listOfTeamsComboBox = new JComboBox<>(teamList);
+
                 remove(addTeam);
                 remove(dropTeam);
                 remove(backToMainMenu);
 
+                saveTeamData.setText("Delete Team");
+
+                add(listOfTeamsComboBox);
                 add(saveTeamData);
                 add(clearWithoutSaving);
 
@@ -142,20 +176,35 @@ public class ManageTeamsMenu extends TransparentOverlayBaseClass {
 
                 setScreenToAddOrDropTeam();
             }else if (e.getSource() == saveTeamData){
-                if(!teamNameTextBox.getText().trim().equals("")){
-                    teamName = teamNameTextBox.getText();
 
-                    region = teamRegionComboBox.getSelectedItem().toString();
+                region = regionComboBox.getSelectedItem().toString();
 
-                    try{
-                        addTeamToDatabase(teamName, region);
-                    }catch (Exception exception){
-                        System.out.println(exception + " ManageTeamsMenu error in ButtonListener at saveTeamData");
+                if(region.equals("Please Select A Region")){
+                    JOptionPane.showMessageDialog(parentFrame, "Please Select A Region");
+                }else {
+                    if(entryModeIsSetForAddingATeam){
+
+                        if(!teamNameTextBox.getText().trim().equals("")){
+                            teamName = teamNameTextBox.getText();
+                            try{
+                                addTeamToDatabase(teamName, region);
+                            }catch (Exception exception){
+                                System.out.println(exception + " ManageTeamsMenu error in ButtonListener at saveTeamData");
+                            }
+
+                            setScreenToAddOrDropTeam();
+                        }else{
+                            JOptionPane.showMessageDialog(parentFrame, "Please Enter a Team Name");
+                        }
+
+                    }else {
+                        try{
+                            DatabaseManager.removeTeamFromRegion(listOfTeamsComboBox.getSelectedItem().toString());
+                        }catch (Exception exception){
+                            System.out.println(exception + " : ManageTeamsMenu saveTeamData removeTeamFromRegion");
+                        }
+                        setScreenToAddOrDropTeam();
                     }
-
-                    setScreenToAddOrDropTeam();
-                }else{
-                    JOptionPane.showMessageDialog(parentFrame, "Please Enter a Team Name");
                 }
 
             }
@@ -172,7 +221,7 @@ public class ManageTeamsMenu extends TransparentOverlayBaseClass {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (teamRegionComboBox.getSelectedItem() != teamRegionComboBox.getItemAt(0)){
+            if (regionComboBox.getSelectedItem() != regionComboBox.getItemAt(0)){
                 dropTeam.setEnabled(true);
                 addTeam.setEnabled(true);
             } else {

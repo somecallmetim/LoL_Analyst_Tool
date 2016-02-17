@@ -168,6 +168,25 @@ public class DatabaseManager {
         return listOfGames;
     }
 
+    public static ArrayList<String> getListOfTeamsByRegion(String region) throws Exception{
+        ArrayList<String> listOfTeams = new ArrayList<>();
+
+        String toInsert = "SELECT teamName FROM teamTable WHERE region = '" + region + "'";
+        PreparedStatement query = conn.prepareStatement(toInsert);
+        ResultSet results = query.executeQuery();
+
+        while(results.next()){
+            listOfTeams.add(results.getString("teamName"));
+        }
+        return listOfTeams;
+    }
+
+    public static void removeTeamFromRegion(String teamName) throws Exception{
+        String toInsert = "DELETE FROM teamTable WHERE teamName = '" + teamName + "'";
+        PreparedStatement query = conn.prepareStatement(toInsert);
+        query.executeUpdate();
+    }
+
     public static ArrayList<Object[]> getGameData(String gameTableName) throws Exception{
         ArrayList<Object[]> gameData = new ArrayList<Object[]>();
 

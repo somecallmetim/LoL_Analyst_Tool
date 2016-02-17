@@ -43,6 +43,7 @@ public class ManageTeamsMenu extends TransparentOverlayBaseClass {
         ComboBoxListener comboBoxListener = new ComboBoxListener(majorRegions);
 
 
+
         regionComboBox = new JComboBox<String>(majorRegions);
         regionComboBox.addActionListener(comboBoxListener);
         this.add(regionComboBox);
@@ -90,6 +91,9 @@ public class ManageTeamsMenu extends TransparentOverlayBaseClass {
     }
 
     private void setScreenToAddOrDropTeam(){
+
+        //Didn't want program crashing if one of these components wasn't currently on
+        // the screen. Not the best solution, but ok to get things rolling
         try{
             remove(teamNameTextBox);
         }catch (Exception exception){}

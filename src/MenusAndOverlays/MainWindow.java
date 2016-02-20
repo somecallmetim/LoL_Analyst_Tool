@@ -46,8 +46,8 @@ public class MainWindow extends JFrame {
 
             mainLayeredPane.add(backgroundMapPanel, JLayeredPane.DEFAULT_LAYER);
 
-            currentOverlay = new MainMenuController();
-            mainLayeredPane.add(currentOverlay, JLayeredPane.PALETTE_LAYER);
+           new MainMenuController();
+
 
         }
 

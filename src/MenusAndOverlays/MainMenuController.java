@@ -12,66 +12,41 @@ import java.awt.event.ActionListener;
 /**
  * Created by timbauer on 12/7/15.
  */
-public class MainMenuController extends TransparentOverlayBaseClassView {
-
-    JButton recordNewGame, reviewRecordedGames, manageTeamsByRegion;
-    JPanel recordingMapMenu, reviewGamesMenu, manageTeamsMenu;
-    Dimension buttonSize = new Dimension(180, 30);
+public class MainMenuController {
 
     ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
-
-
+    JPanel recordingMapMenu, reviewGamesMenu, manageTeamsMenu;
+    MainWindow parentFrame = MainWindow.getMainWindow();
+    static ButtonListener buttonListener;
 
     public MainMenuController(){
-        super();
 
 
-        ButtonListener buttonListener = new ButtonListener();
-
-
-        recordNewGame = new JButton("Record New Game");
-        recordNewGame.addActionListener(buttonListener);
-        recordNewGame.setPreferredSize(buttonSize);
-        this.add(recordNewGame);
-
-
-
-        reviewRecordedGames = new JButton("Review Recorded Games");
-        reviewRecordedGames.addActionListener(buttonListener);
-        reviewRecordedGames.setPreferredSize(buttonSize);
-        this.add(reviewRecordedGames);
-
-        manageTeamsByRegion = new JButton("Manage Teams By Region");
-        manageTeamsByRegion.addActionListener(buttonListener);
-        manageTeamsByRegion.setPreferredSize(buttonSize);
-        this.add(manageTeamsByRegion);
-
-
-        screenOverlayStack.push(this);
-
+        buttonListener = new ButtonListener();
+        MainMenuView mainMenuView = new MainMenuView();
+        parentFrame.addOverlay(mainMenuView);
+        screenOverlayStack.push(mainMenuView);
 
 
     }
 
-    private class ButtonListener implements ActionListener {
+    class ButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == recordNewGame){
+            if(e.getSource() == MainMenuView.recordNewGame){
                 parentFrame.removeCurrentScreenOverlay();
                 recordingMapMenu = new RecordGameMenu();
                 parentFrame.addOverlay(recordingMapMenu);
-            }else if (e.getSource() == reviewRecordedGames){
+            }else if (e.getSource() == MainMenuView.reviewRecordedGames){
                 parentFrame.removeCurrentScreenOverlay();
                 reviewGamesMenu = new ReviewGamesMenu();
                 parentFrame.addOverlay(reviewGamesMenu);
-            } else if (e.getSource() == manageTeamsByRegion){
+            } else if (e.getSource() == MainMenuView.manageTeamsByRegion){
                 parentFrame.removeCurrentScreenOverlay();
                 manageTeamsMenu = new ManageTeamsMenu();
                 parentFrame.addOverlay(manageTeamsMenu);
-
             }
         }
     }
-
 }
 

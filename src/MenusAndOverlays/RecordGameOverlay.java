@@ -209,7 +209,7 @@ public class RecordGameOverlay extends TransparentOverlayBaseClassView implement
                 parentFrame.removeOverlay(bottomMenuBar);
                 //while(!(holdingVariable = screenOverlayStack.pop()).equals(MenusAndOverlays.MainMenuController.class)){}
                 //parentFrame.addOverlay(holdingVariable);
-                parentFrame.addOverlay(new MainMenuController());
+                //parentFrame.addOverlay(new MainMenuController());
             }
         }
     }

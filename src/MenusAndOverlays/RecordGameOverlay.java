@@ -210,9 +210,9 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
                 parentFrame.removeOverlay(mapMarkerHoldingPanel);
                 parentFrame.removeOverlay(menuBarTopSide);
                 parentFrame.removeOverlay(bottomMenuBar);
-                //while(!(holdingVariable = screenOverlayStack.pop()).equals(MenusAndOverlays.MainMenu.class)){}
+                //while(!(holdingVariable = screenOverlayStack.pop()).equals(MenusAndOverlays.MainMenuController.class)){}
                 //parentFrame.addOverlay(holdingVariable);
-                parentFrame.addOverlay(new MainMenu(windowDimension, parentFrame));
+                parentFrame.addOverlay(new MainMenuController(windowDimension, parentFrame));
             }
         }
     }

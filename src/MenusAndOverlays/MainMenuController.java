@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by timbauer on 12/7/15.
  */
-public class MainMenu extends TransparentOverlayBaseClass {
+public class MainMenuController extends TransparentOverlayBaseClass {
 
     JButton recordNewGame, reviewRecordedGames, manageTeamsByRegion;
     JPanel recordingMapMenu, reviewGamesMenu, manageTeamsMenu;
@@ -24,7 +24,7 @@ public class MainMenu extends TransparentOverlayBaseClass {
 
 
 
-    public MainMenu(Dimension windowDimension, MainWindow parentFrame){
+    public MainMenuController(Dimension windowDimension, MainWindow parentFrame){
         super(windowDimension, parentFrame);
         this.windowDimension = windowDimension;
         this.parentFrame = parentFrame;

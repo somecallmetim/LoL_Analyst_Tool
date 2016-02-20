@@ -12,7 +12,7 @@ import java.sql.Date;
 /**
  * Created by timbauer on 12/27/15.
  */
-public class ReviewGamesMenu extends TransparentOverlayBaseClass {
+public class ReviewGamesMenu extends TransparentOverlayBaseClassView {
 
     ArrayList<String>  listOfTeams, listOfGameSeries;
     ArrayList<Date> listOfGameDates;

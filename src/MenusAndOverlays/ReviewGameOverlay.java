@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by timbauer on 12/27/15.
  */
-public class ReviewGameOverlay extends TransparentOverlayBaseClass {
+public class ReviewGameOverlay extends TransparentOverlayBaseClassView {
 
 
     ArrayList<Object[]> gameEventResults;

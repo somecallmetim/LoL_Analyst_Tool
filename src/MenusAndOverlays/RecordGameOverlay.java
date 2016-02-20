@@ -16,7 +16,7 @@ import java.sql.Date;
 /**
  * Created by timbauer on 12/27/15.
  */
-public class RecordGameOverlay extends TransparentOverlayBaseClass implements KeyListener {
+public class RecordGameOverlay extends TransparentOverlayBaseClassView implements KeyListener {
 
     long timeEventOccurred = 0;
     String top = "<html><font color='white'>Q: Top Laner Ward</font></html>";

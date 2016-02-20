@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by timbauer on 12/27/15.
  */
-public class RecordGameMenu extends TransparentOverlayBaseClass {
+public class RecordGameMenu extends TransparentOverlayBaseClassView {
 
     JTextField dateEntryBox;
     JComboBox<String> regionComboBox, teamNameFromDb, monthComboBox, gameNumber;

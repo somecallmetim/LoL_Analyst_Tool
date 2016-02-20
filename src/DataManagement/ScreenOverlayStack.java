@@ -1,15 +1,15 @@
 package DataManagement; /**
  * Created by timbauer on 1/10/16.
  */
-import MenusAndOverlays.TransparentOverlayBaseClass;
+import MenusAndOverlays.TransparentOverlayBaseClassView;
 
 import java.util.Stack;
 
-public class ScreenOverlayStack extends Stack<TransparentOverlayBaseClass> {
+public class ScreenOverlayStack extends Stack<TransparentOverlayBaseClassView> {
 
     private static ScreenOverlayStack screenOverlayStack = new ScreenOverlayStack();
-    private TransparentOverlayBaseClass currentScreen = null;
-    private TransparentOverlayBaseClass holdingVariable;
+    private TransparentOverlayBaseClassView currentScreen = null;
+    private TransparentOverlayBaseClassView holdingVariable;
 
     private ScreenOverlayStack() {
     }
@@ -19,7 +19,7 @@ public class ScreenOverlayStack extends Stack<TransparentOverlayBaseClass> {
     }
 
     @Override
-    public TransparentOverlayBaseClass push(TransparentOverlayBaseClass newPanel){
+    public TransparentOverlayBaseClassView push(TransparentOverlayBaseClassView newPanel){
         if(currentScreen != null){
             super.push(currentScreen);
             currentScreen = newPanel;
@@ -30,7 +30,7 @@ public class ScreenOverlayStack extends Stack<TransparentOverlayBaseClass> {
     }
 
     @Override
-    public TransparentOverlayBaseClass pop(){
+    public TransparentOverlayBaseClassView pop(){
         if(!this.isEmpty()){
             currentScreen = super.pop();
             return currentScreen;

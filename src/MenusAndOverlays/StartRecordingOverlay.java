@@ -11,7 +11,7 @@ import java.sql.Date;
 /**
  * Created by timbauer on 1/7/16.
  */
-public class StartRecordingOverlay extends TransparentOverlayBaseClass {
+public class StartRecordingOverlay extends TransparentOverlayBaseClassView {
 
     JButton startRecording, backButton;
     RecordGameOverlay recordGameOverlay;

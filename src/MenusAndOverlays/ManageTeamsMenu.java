@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by timbauer on 2/15/16.
  */
-public class ManageTeamsMenu extends TransparentOverlayBaseClass {
+public class ManageTeamsMenu extends TransparentOverlayBaseClassView {
 
     JButton addTeam, dropTeam, backToMainMenu, clearWithoutSaving, saveTeamData;
     JTextField teamNameTextBox;

@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by timbauer on 12/7/15.
  */
-public class MainMenuController extends TransparentOverlayBaseClass {
+public class MainMenuController extends TransparentOverlayBaseClassView {
 
     JButton recordNewGame, reviewRecordedGames, manageTeamsByRegion;
     JPanel recordingMapMenu, reviewGamesMenu, manageTeamsMenu;

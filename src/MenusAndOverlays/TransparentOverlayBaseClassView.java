@@ -15,6 +15,11 @@ abstract public class TransparentOverlayBaseClassView extends JPanel {
 
     public TransparentOverlayBaseClassView(){
 
+        this.windowDimension = MainWindow.getWindowDimension();
+        this.parentFrame = MainWindow.getMainWindow();
+        width = windowDimension.width;
+        height = windowDimension.height;
+
         this.setPreferredSize(windowDimension);
         this.setBounds(0, 0, width, height);
         this.setBackground(new Color(0, 0, 0, 0));

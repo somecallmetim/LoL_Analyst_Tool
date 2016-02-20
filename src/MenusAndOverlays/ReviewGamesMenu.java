@@ -29,8 +29,6 @@ public class ReviewGamesMenu extends TransparentOverlayBaseClassView {
     ButtonListener buttonListener;
     RegionComboBoxListener regionComboBoxListener;
 
-    MainWindow parentFrame;
-    Dimension windowDimension;
     ReviewGameOverlay reviewGameOverlay;
 
     final String[] majorRegions = {"Please Select A Region", "NA LCS", "EU LCS", "LCK (Korea)", "LPL (China)",
@@ -38,12 +36,9 @@ public class ReviewGamesMenu extends TransparentOverlayBaseClassView {
 
     ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
 
-    public ReviewGamesMenu(final Dimension windowDimension, MainWindow originalParentFrame){
-        super(windowDimension, originalParentFrame);
-        super.setParentFrame(originalParentFrame);
-        parentFrame = originalParentFrame;
-        this.windowDimension = windowDimension;
-        
+    public ReviewGamesMenu(){
+        super();
+
         buttonListener = new ButtonListener();
         regionComboBoxListener = new RegionComboBoxListener(majorRegions);
 
@@ -165,7 +160,7 @@ public class ReviewGamesMenu extends TransparentOverlayBaseClassView {
                 selectedGameInSeries = gameSeriesComboBox.getSelectedIndex() + 1;
                 String gameId = DatabaseManager.convertDataToGameId(selectedTeam, selectedDate, selectedGameInSeries);
                 try{
-                    reviewGameOverlay = new ReviewGameOverlay(gameId, windowDimension, parentFrame);
+                    reviewGameOverlay = new ReviewGameOverlay(gameId);
                 }catch (Exception exception){
                     System.out.println(exception + " : MenusAndOverlays.ReviewGamesMenu ButtonListener goToReviewGameOverlay");
                 }

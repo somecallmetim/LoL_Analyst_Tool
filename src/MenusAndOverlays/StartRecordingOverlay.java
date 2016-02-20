@@ -20,19 +20,15 @@ public class StartRecordingOverlay extends TransparentOverlayBaseClassView {
     int numOfGameInCurrentSeries;
     Date gameDate;
 
-    MainWindow parentFrame;
-    Dimension windowDimension;
 
     ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
 
-    public StartRecordingOverlay (String team, String teamRegion,  Date gameDate, int numOfGameInCurrentSeries, Dimension windowDimension, MainWindow parentFrame){
-        super(windowDimension, parentFrame);
+    public StartRecordingOverlay (String team, String teamRegion,  Date gameDate, int numOfGameInCurrentSeries){
+        super();
         this.team = team;
         this.teamRegion = teamRegion;
         this.gameDate = gameDate;
         this.numOfGameInCurrentSeries = numOfGameInCurrentSeries;
-        this.windowDimension = windowDimension;
-        this.parentFrame = parentFrame;
 
         ButtonListener buttonListener = new ButtonListener();
 
@@ -55,7 +51,7 @@ public class StartRecordingOverlay extends TransparentOverlayBaseClassView {
             if(e.getSource() == startRecording){
                 parentFrame.removeCurrentScreenOverlay();
                 try {
-                    recordGameOverlay = new RecordGameOverlay(team, teamRegion, gameDate, numOfGameInCurrentSeries, windowDimension, parentFrame);
+                    recordGameOverlay = new RecordGameOverlay(team, teamRegion, gameDate, numOfGameInCurrentSeries);
                 } catch (Exception exception){
                     System.out.println("MenusAndOverlays.StartRecordingOverlay problem: " + exception);
                 }

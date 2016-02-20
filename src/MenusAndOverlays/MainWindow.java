@@ -46,7 +46,7 @@ public class MainWindow extends JFrame {
 
             mainLayeredPane.add(backgroundMapPanel, JLayeredPane.DEFAULT_LAYER);
 
-            currentOverlay = new MainMenuController(windowDimension, mainWindow);
+            currentOverlay = new MainMenuController();
             mainLayeredPane.add(currentOverlay, JLayeredPane.PALETTE_LAYER);
 
         }
@@ -83,5 +83,9 @@ public class MainWindow extends JFrame {
         mainLayeredPane.removeAll();
         mainWindow.validate();
         mainWindow.repaint();
+    }
+
+    public static Dimension getWindowDimension() {
+        return windowDimension;
     }
 }

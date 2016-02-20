@@ -29,29 +29,26 @@ public class RecordGameOverlay extends TransparentOverlayBaseClassView implement
     Date sqlDate;
     int numOfGameInCurrentSeries;
 
-    Dimension windowDimension;
-
     JPanel mapMarkerHoldingPanel;
     HorizontalMenuBar menuBarTopSide, bottomMenuBar;
     JButton backButton, exitToMainMenu;
     JLabel topMarker, midMarker, jungleMarker, adcMarker, supportMarker;
     ButtonListener buttonListener;
-    MainWindow parentFrame;
 
 
     int xCoord, yCoord;
 
     ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
 
-    public RecordGameOverlay(String team, String teamRegion, Date sqlDate, int numOfGameInCurrentSeries, Dimension windowDimension, MainWindow parentFrame) throws IOException, Exception {
+    public RecordGameOverlay(String team, String teamRegion, Date sqlDate, int numOfGameInCurrentSeries) throws IOException, Exception {
+        super();
+
         buttonListener = new ButtonListener();
 
-        this.windowDimension = windowDimension;
         this.team = team;
         this.teamRegion = teamRegion;
         this.sqlDate = sqlDate;
         this.numOfGameInCurrentSeries = numOfGameInCurrentSeries;
-        this.parentFrame = parentFrame;
 
         game_Id = DatabaseManager.addGameToGamesTable(this.team, this.sqlDate, this.numOfGameInCurrentSeries);
 
@@ -212,7 +209,7 @@ public class RecordGameOverlay extends TransparentOverlayBaseClassView implement
                 parentFrame.removeOverlay(bottomMenuBar);
                 //while(!(holdingVariable = screenOverlayStack.pop()).equals(MenusAndOverlays.MainMenuController.class)){}
                 //parentFrame.addOverlay(holdingVariable);
-                parentFrame.addOverlay(new MainMenuController(windowDimension, parentFrame));
+                parentFrame.addOverlay(new MainMenuController());
             }
         }
     }

@@ -22,8 +22,7 @@ public class ManageTeamsMenu extends TransparentOverlayBaseClassView {
 
     JPanel recordingMapMenu, reviewGamesMenu;
     Dimension buttonSize = new Dimension(180, 30);
-    Dimension windowDimension;
-    MainWindow parentFrame;
+
 
 
     boolean entryModeIsSetForAddingATeam = true;
@@ -33,11 +32,8 @@ public class ManageTeamsMenu extends TransparentOverlayBaseClassView {
 
 
 
-    public ManageTeamsMenu(Dimension windowDimension, MainWindow parentFrame){
-        super(windowDimension, parentFrame);
-        this.windowDimension = windowDimension;
-        this.parentFrame = parentFrame;
-
+    public ManageTeamsMenu(){
+        super();
 
         String[] majorRegions = {"Please Select A Region", "NA LCS", "EU LCS", "LCK (Korea)", "LPL (China)", "LMS (Taiwan)", "IWC (International Wild Card)"};
 

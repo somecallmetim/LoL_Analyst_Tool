@@ -17,17 +17,13 @@ public class MainMenuController extends TransparentOverlayBaseClassView {
     JButton recordNewGame, reviewRecordedGames, manageTeamsByRegion;
     JPanel recordingMapMenu, reviewGamesMenu, manageTeamsMenu;
     Dimension buttonSize = new Dimension(180, 30);
-    Dimension windowDimension;
-    MainWindow parentFrame;
 
     ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
 
 
 
-    public MainMenuController(Dimension windowDimension, MainWindow parentFrame){
-        super(windowDimension, parentFrame);
-        this.windowDimension = windowDimension;
-        this.parentFrame = parentFrame;
+    public MainMenuController(){
+        super();
 
 
         ButtonListener buttonListener = new ButtonListener();
@@ -62,15 +58,15 @@ public class MainMenuController extends TransparentOverlayBaseClassView {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == recordNewGame){
                 parentFrame.removeCurrentScreenOverlay();
-                recordingMapMenu = new RecordGameMenu(windowDimension, parentFrame);
+                recordingMapMenu = new RecordGameMenu();
                 parentFrame.addOverlay(recordingMapMenu);
             }else if (e.getSource() == reviewRecordedGames){
                 parentFrame.removeCurrentScreenOverlay();
-                reviewGamesMenu = new ReviewGamesMenu(windowDimension, parentFrame);
+                reviewGamesMenu = new ReviewGamesMenu();
                 parentFrame.addOverlay(reviewGamesMenu);
             } else if (e.getSource() == manageTeamsByRegion){
                 parentFrame.removeCurrentScreenOverlay();
-                manageTeamsMenu = new ManageTeamsMenu(windowDimension, parentFrame);
+                manageTeamsMenu = new ManageTeamsMenu();
                 parentFrame.addOverlay(manageTeamsMenu);
 
             }

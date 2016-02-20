@@ -26,8 +26,6 @@ public class RecordGameMenu extends TransparentOverlayBaseClassView {
     String[] teamList;
     StartRecordingOverlay startRecordingOverlay;
 
-    MainWindow parentFrame;
-    Dimension windowDimension;
 
     Date sqlDate = new Date(System.currentTimeMillis());
     String currentDate = sqlDate.toString();
@@ -47,10 +45,8 @@ public class RecordGameMenu extends TransparentOverlayBaseClassView {
 
     ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
 
-    public RecordGameMenu(Dimension windowDimension, MainWindow parentFrame){
-        super(windowDimension, parentFrame);
-        this.parentFrame = parentFrame;
-        this.windowDimension = windowDimension;
+    public RecordGameMenu(){
+        super();
 
 
 
@@ -153,8 +149,7 @@ public class RecordGameMenu extends TransparentOverlayBaseClassView {
                 Date sqlDate = convertStringToSqlDate(month, day, year);
                 parentFrame.removeCurrentScreenOverlay();
                 try{
-                    startRecordingOverlay = new StartRecordingOverlay(teamName, teamRegion, sqlDate, numOfGameInCurrentSeries,
-                            windowDimension, parentFrame);
+                    startRecordingOverlay = new StartRecordingOverlay(teamName, teamRegion, sqlDate, numOfGameInCurrentSeries);
                 }catch (Exception exception){
                     System.out.println("Recording Map Menu\n" + exception);
                 }

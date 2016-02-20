@@ -28,15 +28,14 @@ public class ReviewGameOverlay extends TransparentOverlayBaseClassView {
     long time;
     int xCoord, yCoord;
 
-    MainWindow parentFrame;
 
     ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
 
 
-    public ReviewGameOverlay(String gameId, Dimension windowDimension, MainWindow parentFrame)throws Exception{
-        super(windowDimension, parentFrame);
+    public ReviewGameOverlay(String gameId)throws Exception{
+        super();
         buttonListener = new ButtonListener();
-        this.parentFrame = parentFrame;
+
 
         this.setLayout(null);
 

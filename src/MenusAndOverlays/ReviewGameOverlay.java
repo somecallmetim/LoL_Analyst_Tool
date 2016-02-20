@@ -2,7 +2,7 @@ package MenusAndOverlays;
 
 import DataManagement.DatabaseManager;
 import DataManagement.ImageManager;
-import TemplatesAndBaseClasses.ScreenOverlayStack;
+import DataManagement.ScreenOverlayStack;
 
 import javax.swing.*;
 import java.awt.*;

@@ -3,7 +3,7 @@ package MenusAndOverlays;
 import DataManagement.DatabaseManager;
 import DataManagement.EventTimer;
 import DataManagement.ImageManager;
-import TemplatesAndBaseClasses.ScreenOverlayStack;
+import DataManagement.ScreenOverlayStack;
 import TemplatesAndBaseClasses.HorizontalMenuBar;
 
 import javax.swing.*;

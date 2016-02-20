@@ -1,9 +1,6 @@
-package TemplatesAndBaseClasses;
+package MenusAndOverlays;
 
-import MenusAndOverlays.MainWindow;
-import MenusAndOverlays.RecordGameOverlay;
-import TemplatesAndBaseClasses.ScreenOverlayStack;
-import MenusAndOverlays.TransparentOverlayBaseClass;
+import DataManagement.ScreenOverlayStack;
 
 import javax.swing.*;
 import java.awt.*;
@@ -60,7 +57,7 @@ public class StartRecordingOverlay extends TransparentOverlayBaseClass {
                 try {
                     recordGameOverlay = new RecordGameOverlay(team, teamRegion, gameDate, numOfGameInCurrentSeries, windowDimension, parentFrame);
                 } catch (Exception exception){
-                    System.out.println("TemplatesAndBaseClasses.StartRecordingOverlay problem: " + exception);
+                    System.out.println("MenusAndOverlays.StartRecordingOverlay problem: " + exception);
                 }
                 parentFrame.addOverlay(recordGameOverlay);
             }else if (e.getSource() == backButton){

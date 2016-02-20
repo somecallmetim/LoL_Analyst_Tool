@@ -2,7 +2,7 @@ import DataManagement.DatabaseManager;
 import DataManagement.EventTimer;
 import DataManagement.ImageManager;
 import MenusAndOverlays.MainWindow;
-import TemplatesAndBaseClasses.ScreenOverlayStack;
+import DataManagement.ScreenOverlayStack;
 
 import java.io.IOException;
 

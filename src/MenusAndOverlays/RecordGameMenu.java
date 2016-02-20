@@ -1,3 +1,9 @@
+package MenusAndOverlays;
+
+import DataManagement.DatabaseManager;
+import TemplatesAndBaseClasses.ScreenOverlayStack;
+import TemplatesAndBaseClasses.StartRecordingOverlay;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -123,7 +129,7 @@ public class RecordGameMenu extends TransparentOverlayBaseClass {
         try{
             toBeConverted = simpleDateFormat.parse(formattedDate);
         }catch(Exception exception){
-            System.out.println(exception + " : RecordGameMenu convertStringToSqlDate");
+            System.out.println(exception + " : MenusAndOverlays.RecordGameMenu convertStringToSqlDate");
         }
 
         Date dateOfGame = new Date(toBeConverted.getTime());
@@ -195,7 +201,7 @@ public class RecordGameMenu extends TransparentOverlayBaseClass {
                 try{
                     listOfTeams = DatabaseManager.getListOfTeamsByRegion(regionComboBox.getSelectedItem().toString());
                 }catch (Exception exception){
-                    System.out.println(exception + " : RecordGameMenu ComboBoxListener actionPerformed");
+                    System.out.println(exception + " : MenusAndOverlays.RecordGameMenu ComboBoxListener actionPerformed");
                 }
 
                 teamList = new String[listOfTeams.size()];

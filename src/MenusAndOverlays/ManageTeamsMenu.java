@@ -1,4 +1,7 @@
-import javafx.scene.control.ComboBox;
+package MenusAndOverlays;
+
+import DataManagement.DatabaseManager;
+import TemplatesAndBaseClasses.ScreenOverlayStack;
 
 import javax.swing.*;
 import java.awt.*;
@@ -149,7 +152,7 @@ public class ManageTeamsMenu extends TransparentOverlayBaseClass {
                 try{
                     listOfTeams = DatabaseManager.getListOfTeamsByRegion(region);
                 }catch (Exception exception){
-                    System.out.println(exception + " problem in ManageTeamsMenu in ButtonListener at dropTeam");
+                    System.out.println(exception + " problem in MenusAndOverlays.ManageTeamsMenu in ButtonListener at dropTeam");
                 }
 
                 String[] teamList = new String[listOfTeams.size()];
@@ -193,7 +196,7 @@ public class ManageTeamsMenu extends TransparentOverlayBaseClass {
                             try{
                                 addTeamToDatabase(teamName, region);
                             }catch (Exception exception){
-                                System.out.println(exception + " ManageTeamsMenu error in ButtonListener at saveTeamData");
+                                System.out.println(exception + " MenusAndOverlays.ManageTeamsMenu error in ButtonListener at saveTeamData");
                             }
 
                             setScreenToAddOrDropTeam();
@@ -205,7 +208,7 @@ public class ManageTeamsMenu extends TransparentOverlayBaseClass {
                         try{
                             DatabaseManager.removeTeamFromRegion(listOfTeamsComboBox.getSelectedItem().toString());
                         }catch (Exception exception){
-                            System.out.println(exception + " : ManageTeamsMenu saveTeamData removeTeamFromRegion");
+                            System.out.println(exception + " : MenusAndOverlays.ManageTeamsMenu saveTeamData removeTeamFromRegion");
                         }
                         setScreenToAddOrDropTeam();
                     }

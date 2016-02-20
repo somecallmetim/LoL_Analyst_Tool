@@ -1,4 +1,4 @@
-// from https://tips4java.wordpress.com/2008/10/12/background-panel/
+package TemplatesAndBaseClasses;// from https://tips4java.wordpress.com/2008/10/12/background-panel/
 
 import javax.swing.*;
 import java.awt.*;

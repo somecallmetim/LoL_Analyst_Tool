@@ -1,3 +1,9 @@
+package MenusAndOverlays;
+
+import DataManagement.DatabaseManager;
+import DataManagement.ImageManager;
+import TemplatesAndBaseClasses.ScreenOverlayStack;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

@@ -1,3 +1,8 @@
+package MenusAndOverlays;
+
+import DataManagement.ImageManager;
+import TemplatesAndBaseClasses.BackgroundMapPanel;
+
 import javax.swing.*;
 import java.awt.*;
 

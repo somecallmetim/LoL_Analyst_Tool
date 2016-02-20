@@ -1,3 +1,8 @@
+package TemplatesAndBaseClasses;
+
+import MenusAndOverlays.MainWindow;
+import MenusAndOverlays.TransparentOverlayBaseClass;
+
 import java.awt.*;
 
 /**

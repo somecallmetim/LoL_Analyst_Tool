@@ -1,3 +1,11 @@
+package MenusAndOverlays;
+
+import DataManagement.DatabaseManager;
+import DataManagement.EventTimer;
+import DataManagement.ImageManager;
+import TemplatesAndBaseClasses.ScreenOverlayStack;
+import TemplatesAndBaseClasses.HorizontalMenuBar;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -202,7 +210,7 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
                 parentFrame.removeOverlay(mapMarkerHoldingPanel);
                 parentFrame.removeOverlay(menuBarTopSide);
                 parentFrame.removeOverlay(bottomMenuBar);
-                //while(!(holdingVariable = screenOverlayStack.pop()).equals(MainMenu.class)){}
+                //while(!(holdingVariable = screenOverlayStack.pop()).equals(MenusAndOverlays.MainMenu.class)){}
                 //parentFrame.addOverlay(holdingVariable);
                 parentFrame.addOverlay(new MainMenu(windowDimension, parentFrame));
             }

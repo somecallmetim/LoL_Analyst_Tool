@@ -1,3 +1,8 @@
+package MenusAndOverlays;
+
+import DataManagement.DatabaseManager;
+import TemplatesAndBaseClasses.ScreenOverlayStack;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -111,7 +116,7 @@ public class ReviewGamesMenu extends TransparentOverlayBaseClass {
                 try{
                     listOfGameDates = DatabaseManager.getTeamGameDates(selectedTeam);
                 }catch (Exception exception){
-                    System.out.println(exception + " : ReviewGamesMenu ButtonListener getTeamGameDates");
+                    System.out.println(exception + " : MenusAndOverlays.ReviewGamesMenu ButtonListener getTeamGameDates");
                 }
                 teamGameDates = new Date[listOfGameDates.size()];
                 teamGameDates = listOfGameDates.toArray(teamGameDates);
@@ -134,7 +139,7 @@ public class ReviewGamesMenu extends TransparentOverlayBaseClass {
                 try{
                     listOfGameSeries = DatabaseManager.getTeamGameSeries(selectedTeam, selectedDate);
                 }catch(Exception exception){
-                    System.out.println(exception + " : ReviewGamesMenu ButtonListener getTeamGameSeries");
+                    System.out.println(exception + " : MenusAndOverlays.ReviewGamesMenu ButtonListener getTeamGameSeries");
                 }
 
                 seriesList = new String[listOfGameSeries.size()];
@@ -162,7 +167,7 @@ public class ReviewGamesMenu extends TransparentOverlayBaseClass {
                 try{
                     reviewGameOverlay = new ReviewGameOverlay(gameId, windowDimension, parentFrame);
                 }catch (Exception exception){
-                    System.out.println(exception + " : ReviewGamesMenu ButtonListener goToReviewGameOverlay");
+                    System.out.println(exception + " : MenusAndOverlays.ReviewGamesMenu ButtonListener goToReviewGameOverlay");
                 }
 
 
@@ -187,7 +192,7 @@ public class ReviewGamesMenu extends TransparentOverlayBaseClass {
                 try{
                     listOfTeams = DatabaseManager.getListOfTeamsByRegion(regionComboBox.getSelectedItem().toString());
                 }catch (Exception exception){
-                    System.out.println(exception + " : ReviewGamesMenu RegionComboBoxListener actionPerformed");
+                    System.out.println(exception + " : MenusAndOverlays.ReviewGamesMenu RegionComboBoxListener actionPerformed");
                 }
 
                 try{

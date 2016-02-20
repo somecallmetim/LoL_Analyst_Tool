@@ -27,8 +27,11 @@ public class RecordGameMenu extends TransparentOverlayBaseClass {
     Date sqlDate = new Date(System.currentTimeMillis());
     String currentDate = sqlDate.toString();
 
+    final String[] majorRegions = {"Please Select A Region", "NA LCS", "EU LCS", "LCK (Korea)", "LPL (China)",
+            "LMS (Taiwan)", "IWC (International Wild Card)"};
+
     final String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September",
-            "Ocotober", "November", "December"};
+            "October", "November", "December"};
 
     final Integer[] days = {1, 2, 3, 4, 5, 6, 7, 8 , 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
             27, 28, 29, 30, 31};
@@ -44,8 +47,7 @@ public class RecordGameMenu extends TransparentOverlayBaseClass {
         this.parentFrame = parentFrame;
         this.windowDimension = windowDimension;
 
-        String[] majorRegions = {"Please Select A Region", "NA LCS", "EU LCS", "LCK (Korea)", "LPL (China)",
-                "LMS (Taiwan)", "IWC (International Wild Card)"};
+
 
         this.setLayout(new FlowLayout());
 
@@ -212,7 +214,7 @@ public class RecordGameMenu extends TransparentOverlayBaseClass {
                 parentFrame.validate();
                 parentFrame.repaint();
             } else {
-
+                //ToDo
             }
 
         }

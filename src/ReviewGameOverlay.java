@@ -22,18 +22,21 @@ public class ReviewGameOverlay extends TransparentOverlayBaseClass {
     long time;
     int xCoord, yCoord;
 
+    MainWindow parentFrame;
+
     ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
 
 
-    public ReviewGameOverlay(String gameName,Dimension windowDimension, MainWindow parentFrame)throws Exception{
+    public ReviewGameOverlay(String gameId, Dimension windowDimension, MainWindow parentFrame)throws Exception{
         super(windowDimension, parentFrame);
         buttonListener = new ButtonListener();
+        this.parentFrame = parentFrame;
 
         this.setLayout(null);
 
         parentFrame.addOverlay(this);
 
-        gameEventResults = DatabaseManager.getGameData(gameName);
+        gameEventResults = DatabaseManager.getGameData(gameId);
 
         int numOfRecordedEvents = gameEventResults.size();
         gameResults = new Object[numOfRecordedEvents][5];
@@ -47,19 +50,19 @@ public class ReviewGameOverlay extends TransparentOverlayBaseClass {
             invalidEvent = false;
 
             switch ((String)gameResults[i][0]){
-                case "top warded":
+                case "<html><font color='white'>Q: Top Laner Ward</font></html>":
                     icon = ImageManager.topIcon;
                     break;
-                case "mid warded":
+                case "<html><font color='white'>W: Mid Laner Ward</font></html>":
                     icon = ImageManager.midIcon;
                     break;
-                case "adc warded":
+                case "<html><font color='white'>E: ADC Ward</font></html>":
                     icon = ImageManager.adcIcon;
                     break;
-                case "support warded":
+                case "<html><font color='white'>R: Support Ward</font></html>":
                     icon = ImageManager.suppIcon;
                     break;
-                case "jungle warded":
+                case "<html><font color='white'>T: Jungler Ward</font></html>":
                     icon = ImageManager.jungleIcon;
                     break;
                 default:

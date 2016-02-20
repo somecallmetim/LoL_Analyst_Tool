@@ -93,7 +93,7 @@ public class ManageTeamsMenu extends TransparentOverlayBaseClass {
     private void setScreenToAddOrDropTeam(){
 
         //Didn't want program crashing if one of these components wasn't currently on
-        // the screen. Not the best solution, but ok to get things rolling
+        // the screen. Not the best solution, but it does keep things rolling
         try{
             remove(teamNameTextBox);
         }catch (Exception exception){}

@@ -5,11 +5,11 @@
 import javax.swing.*;
 import java.util.Stack;
 
-public class ScreenOverlayStack extends Stack<JPanel> {
+public class ScreenOverlayStack extends Stack<TransparentOverlayBaseClass> {
 
     private static ScreenOverlayStack screenOverlayStack = new ScreenOverlayStack();
-    private JPanel currentScreen = null;
-    private JPanel holdingVariable;
+    private TransparentOverlayBaseClass currentScreen = null;
+    private TransparentOverlayBaseClass holdingVariable;
 
     private ScreenOverlayStack() {
     }
@@ -19,7 +19,7 @@ public class ScreenOverlayStack extends Stack<JPanel> {
     }
 
     @Override
-    public JPanel push(JPanel newPanel){
+    public TransparentOverlayBaseClass push(TransparentOverlayBaseClass newPanel){
         if(currentScreen != null){
             super.push(currentScreen);
             currentScreen = newPanel;
@@ -30,7 +30,7 @@ public class ScreenOverlayStack extends Stack<JPanel> {
     }
 
     @Override
-    public JPanel pop(){
+    public TransparentOverlayBaseClass pop(){
         if(!this.isEmpty()){
             currentScreen = super.pop();
             return currentScreen;

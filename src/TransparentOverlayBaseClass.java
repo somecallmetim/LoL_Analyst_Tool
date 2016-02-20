@@ -43,6 +43,8 @@ abstract public class TransparentOverlayBaseClass extends JPanel {
         this.setOpaque(false);
     }
 
+    public void onRestart(){}
+
     public static void setWidth(int width) {
         TransparentOverlayBaseClass.width = width;
     }
@@ -62,8 +64,6 @@ abstract public class TransparentOverlayBaseClass extends JPanel {
     public static void setParentFrame(MainWindow newParentFrame) {
         parentFrame = newParentFrame;
     }
-
-
 
     public static int getWindowWidth() {
         return width;

@@ -17,7 +17,7 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
     String supp = "<html><font color='white'>R: Support Ward</font></html>";
     String jungle = "<html><font color='white'>T: Jungler Ward</font></html>";
     String whatOccurred = jungle;
-    String team, teamRegion, gameName;
+    String team, teamRegion, game_Id;
     Date sqlDate;
     int numOfGameInCurrentSeries;
 
@@ -45,7 +45,7 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
         this.numOfGameInCurrentSeries = numOfGameInCurrentSeries;
         this.parentFrame = parentFrame;
 
-        gameName = DatabaseManager.addGameToGamesTable(this.team, this.sqlDate, this.numOfGameInCurrentSeries);
+        game_Id = DatabaseManager.addGameToGamesTable(this.team, this.sqlDate, this.numOfGameInCurrentSeries);
 
         mapMarkerHoldingPanel = new JPanel();
         menuBarTopSide = new HorizontalMenuBar(windowDimension, parentFrame);
@@ -116,7 +116,7 @@ public class RecordGameOverlay extends TransparentOverlayBaseClass implements Ke
                 mapMarkerHoldingPanel.repaint();
 
                 try{
-                    DatabaseManager.addEntryToCurrentGameTable(gameName, whatOccurred, timeEventOccurred, xCoord, yCoord);
+                    DatabaseManager.addEntryToCurrentGameTable(game_Id, whatOccurred, timeEventOccurred, xCoord, yCoord);
                 }catch (Exception e2){
                     System.out.println(e2);
                 }

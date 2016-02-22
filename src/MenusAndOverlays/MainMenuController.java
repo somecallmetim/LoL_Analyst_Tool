@@ -5,7 +5,6 @@ package MenusAndOverlays; /**
 import DataManagement.ScreenOverlayStack;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -35,8 +34,7 @@ public class MainMenuController {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == MainMenuView.recordNewGame){
                 parentFrame.removeCurrentScreenOverlay();
-                recordingMapMenu = new RecordGameMenu();
-                parentFrame.addOverlay(recordingMapMenu);
+                new RecordGameMenuController(new RecordGameMenuView(), new RecordGameMenuModel());
             }else if (e.getSource() == MainMenuView.reviewRecordedGames){
                 parentFrame.removeCurrentScreenOverlay();
                 reviewGamesMenu = new ReviewGamesMenu();

@@ -128,9 +128,4 @@ public class RecordGameMenuModel {
         return year;
     }
 
-    private void convertDateToComboBoxes(){
-        int year = Integer.parseInt(currentDate.substring(0, 4));
-        int day = Integer.parseInt(currentDate.substring(9));
-        int month = Integer.parseInt(currentDate.substring(5, 7));
-    }
 }

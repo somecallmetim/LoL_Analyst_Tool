@@ -41,8 +41,7 @@ public class MainMenuController {
                 parentFrame.addOverlay(reviewGamesMenu);
             } else if (e.getSource() == MainMenuView.manageTeamsByRegion){
                 parentFrame.removeCurrentScreenOverlay();
-                manageTeamsMenu = new ManageTeamsMenu();
-                parentFrame.addOverlay(manageTeamsMenu);
+                new ManageTeamsMenuController(new ManageTeamsMenuView(), new ManageTeamsMenuModel());
             }
         }
     }

@@ -12,12 +12,8 @@ import java.util.ArrayList;
 /**
  * Created by timbauer on 2/20/16.
  */
-public class RecordGameMenuController {
+public class RecordGameMenuController extends TransparentOverlayBaseClassController{
 
-
-    ArrayList<Component> componentsToAdd = new ArrayList<>();
-    ArrayList<Component> componentsToRemove = new ArrayList<>();
-    Component[] arrayOfComponentsToAdd, arrayOfComponentsToRemove;
 
     RecordGameMenuView recordGameMenuView;
     RecordGameMenuModel recordGameMenuModel;
@@ -31,8 +27,6 @@ public class RecordGameMenuController {
     String region;
 
     StartRecordingOverlay startRecordingOverlay;
-    MainWindow parentFrame = MainWindow.getMainWindow();
-    ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
 
 
     public RecordGameMenuController(RecordGameMenuView recordGameMenuView, RecordGameMenuModel recordGameMenuModel){
@@ -71,10 +65,7 @@ public class RecordGameMenuController {
         componentsToRemove.add(goToRecordingMapWindowButton);
         componentsToRemove.add(backButton);
 
-        arrayOfComponentsToRemove = new Component[componentsToRemove.size()];
-        arrayOfComponentsToRemove = componentsToRemove.toArray(arrayOfComponentsToRemove);
-
-        recordGameMenuView.removeComponents(arrayOfComponentsToRemove);
+        removeComponentsFromView(recordGameMenuView, componentsToRemove);
 
 
 
@@ -83,12 +74,7 @@ public class RecordGameMenuController {
 
         recordGameMenuView.setRegionComboBoxValues(recordGameMenuModel.getMajorRegions());
 
-        arrayOfComponentsToAdd = new Component[componentsToAdd.size()];
-        arrayOfComponentsToAdd = componentsToAdd.toArray(arrayOfComponentsToAdd);
-
-        recordGameMenuView.addComponents(arrayOfComponentsToAdd);
-
-
+        addComponentsToView(recordGameMenuView, componentsToAdd);
 
         componentsToRemove.clear();
         componentsToAdd.clear();
@@ -99,10 +85,7 @@ public class RecordGameMenuController {
         componentsToRemove.add(regionComboBox);
         componentsToRemove.add(backButton);
 
-        arrayOfComponentsToRemove = new Component[componentsToRemove.size()];
-        arrayOfComponentsToRemove = componentsToRemove.toArray(arrayOfComponentsToRemove);
-
-        recordGameMenuView.removeComponents(arrayOfComponentsToRemove);
+        removeComponentsFromView(recordGameMenuView, componentsToRemove);
 
         componentsToAdd.add(teamNameComboBox);
         componentsToAdd.add(monthComboBox);
@@ -124,13 +107,7 @@ public class RecordGameMenuController {
         recordGameMenuView.setDayComboBoxSelectedItem(recordGameMenuModel.getCurrentDay());
         recordGameMenuView.setYearComboBoxSelectedItem(recordGameMenuModel.getCurrentYear());
 
-
-        arrayOfComponentsToAdd = new Component[componentsToAdd.size()];
-        arrayOfComponentsToAdd = componentsToAdd.toArray(arrayOfComponentsToAdd);
-
-        recordGameMenuView.addComponents(arrayOfComponentsToAdd);
-
-
+        addComponentsToView(recordGameMenuView, componentsToAdd);
 
         componentsToRemove.clear();
         componentsToAdd.clear();

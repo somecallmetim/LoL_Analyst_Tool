@@ -52,6 +52,38 @@ abstract public class TransparentOverlayBaseClassView extends JPanel {
 
     public void onRestart(){}
 
+    //..............Methods used to add/remove components to/from menu..............//
+    public void addComponent(Component component){
+        this.add(component);
+        parentFrame.validate();
+        parentFrame.repaint();
+    }
+
+    public void removeComponent(Component component){
+        try{
+            this.remove(component);
+            parentFrame.validate();
+            parentFrame.repaint();
+        }catch (Exception exception){}
+    }
+
+    public void addComponents(Component[] components){
+        for(int i = 0; i < components.length; i++) this.add(components[i]);
+        parentFrame.validate();
+        parentFrame.repaint();
+    }
+
+    public void removeComponents(Component[] components){
+
+        for(int i = 0; i < components.length; i++) {
+            try{
+                this.remove(components[i]);
+            }catch (Exception exception){}
+        }
+        parentFrame.validate();
+        parentFrame.repaint();
+    }
+
     public static void setWidth(int width) {
         TransparentOverlayBaseClassView.width = width;
     }

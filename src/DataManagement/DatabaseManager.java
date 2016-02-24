@@ -180,7 +180,7 @@ public class DatabaseManager {
         return listOfTeams;
     }
 
-    public static void removeTeamFromRegion(String teamName) throws Exception{
+    public static void removeTeamFromDatabase(String teamName) throws Exception{
         String toRemove = "DELETE FROM teamTable WHERE teamName = '" + teamName + "'";
         PreparedStatement query = conn.prepareStatement(toRemove);
         query.executeUpdate();

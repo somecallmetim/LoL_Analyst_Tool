@@ -40,6 +40,7 @@ public class RecordGameMenuView extends TransparentOverlayBaseClassView {
         screenOverlayStack.push(this);
     }
 
+    //..............Methods used to set ActionListeners for various components..............//
     public void addRegionComboBoxActionListener(ActionListener regionComboBoxActionListener){
         regionComboBox.addActionListener(regionComboBoxActionListener);
     }
@@ -115,37 +116,6 @@ public class RecordGameMenuView extends TransparentOverlayBaseClassView {
         gameNumber.setModel(new DefaultComboBoxModel<String>(gameSeriesNumbers));
     }
 
-    //..............Methods used to add/remove components to/from menu..............//
-    public void addComponent(Component component){
-        this.add(component);
-        parentFrame.validate();
-        parentFrame.repaint();
-    }
-
-    public void removeComponent(Component component){
-        try{
-            this.remove(component);
-            parentFrame.validate();
-            parentFrame.repaint();
-        }catch (Exception exception){}
-    }
-
-    public void addComponents(Component[] components){
-        for(int i = 0; i < components.length; i++) this.add(components[i]);
-        parentFrame.validate();
-        parentFrame.repaint();
-    }
-
-    public void removeComponents(Component[] components){
-
-            for(int i = 0; i < components.length; i++) {
-                try{
-                    this.remove(components[i]);
-                }catch (Exception exception){}
-            }
-        parentFrame.validate();
-        parentFrame.repaint();
-    }
 
     //..............Methods used to get specific components from menu..............//
     public JComboBox<String> getRegionComboBox() {
@@ -179,72 +149,5 @@ public class RecordGameMenuView extends TransparentOverlayBaseClassView {
     public JButton getBackButton() {
         return backButton;
     }
-/*
-    //..............Methods used to add specific components to menu..............//
-    public void addRegionComboBox(){
-        this.add(regionComboBox);
-    }
 
-    public void addTeamNameComboBox(){
-        this.add(teamNameComboBox);
-    }
-
-    public void addDayComboBox(){
-        this.add(dayComboBox);
-    }
-
-    public void addMonthComboBox(){
-        this.add(monthComboBox);
-    }
-
-    public void addYearComboBox(){
-        this.add(yearComboBox);
-    }
-
-    public void addGameNumberComboBox(){
-        this.add(gameNumber);
-    }
-
-    public void addGoToRecordingMapMenuButton(){
-        this.add(goToRecordingMapWindowButton);
-    }
-
-    public void addBackButton(){
-        this.add(backButton);
-    }
-
-
-    //..............Methods used to remove specific components from menu..............//
-    public void removeRegionComboBox(){
-        this.remove(regionComboBox);
-    }
-
-    public void removeTeamNameComboBox(){
-        this.remove(teamNameComboBox);
-    }
-
-    public void removeDayComboBox(){
-        this.remove(dayComboBox);
-    }
-
-    public void removeMonthComboBox(){
-        this.remove(monthComboBox);
-    }
-
-    public void removeYearComboBox(){
-        this.remove(yearComboBox);
-    }
-
-    public void removeGameNumberComboBox(){
-        this.remove(gameNumber);
-    }
-
-    public void removeGoToRecordingMapMenuButton(){
-        this.remove(goToRecordingMapWindowButton);
-    }
-
-    public void removeBackButton(){
-        this.remove(backButton);
-    }
-    */
 }

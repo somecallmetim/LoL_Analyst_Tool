@@ -192,6 +192,7 @@ public class ReviewGamesMenuController extends TransparentOverlayBaseClassContro
                 try{
                     ReviewGameOverlay reviewGameOverlay = new ReviewGameOverlay(gameId);
                     parentFrame.removeCurrentScreenOverlay();
+                    parentFrame.removeOverlay(reviewGamesMenuView);
                     parentFrame.addOverlay(reviewGameOverlay);
                 }catch (Exception exception){
                     JOptionPane.showMessageDialog(parentFrame, "There was a problem retrieving the specified game");

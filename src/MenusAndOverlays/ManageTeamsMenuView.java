@@ -91,6 +91,10 @@ public class ManageTeamsMenuView extends TransparentOverlayBaseClassView {
         this.listOfTeamsComboBox.setModel(new DefaultComboBoxModel<String>(listOfTeams));
     }
 
+    public void setSaveTeamDataButtonText(String buttonText){
+        saveTeamDataButton.setText(buttonText);
+    }
+
     //..............Methods used to get specific components from menu..............//
     public JButton getAddTeamButton() { return addTeamButton; }
 

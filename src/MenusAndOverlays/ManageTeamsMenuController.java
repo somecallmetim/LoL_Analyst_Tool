@@ -101,10 +101,12 @@ public class ManageTeamsMenuController extends TransparentOverlayBaseClassContro
 
         if(addingTeam){
             componentsToAdd.add(teamNameTextBox);
+            manageTeamsMenuView.setSaveTeamDataButtonText("Save New Team");
         }else {
             componentsToAdd.add(listOfTeamsComboBox);
             try{
                 manageTeamsMenuView.setListOfTeamsComboBox(manageTeamsMenuModel.getListOfTeamsFromRegion());
+                manageTeamsMenuView.setSaveTeamDataButtonText("Drop Team");
             }catch (Exception exception){
                 JOptionPane.showMessageDialog(parentFrame, "There was an issue getting the teams from the region");
                 onInit();

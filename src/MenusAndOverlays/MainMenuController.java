@@ -37,8 +37,7 @@ public class MainMenuController {
                 new RecordGameMenuController(new RecordGameMenuView(), new RecordGameMenuModel());
             }else if (e.getSource() == MainMenuView.reviewRecordedGames){
                 parentFrame.removeCurrentScreenOverlay();
-                reviewGamesMenu = new ReviewGamesMenu();
-                parentFrame.addOverlay(reviewGamesMenu);
+                new ReviewGamesMenuController(new ReviewGamesMenuView(), new ReviewGamesMenuModel());
             } else if (e.getSource() == MainMenuView.manageTeamsByRegion){
                 parentFrame.removeCurrentScreenOverlay();
                 new ManageTeamsMenuController(new ManageTeamsMenuView(), new ManageTeamsMenuModel());

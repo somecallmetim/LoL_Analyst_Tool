@@ -139,6 +139,7 @@ public class RecordGameMenuController extends TransparentOverlayBaseClassControl
                 }catch (Exception exception){
                     System.out.println("Recording Map Menu\n" + exception);
                 }
+                parentFrame.removeCurrentScreenOverlay();
                 parentFrame.addOverlay(startRecordingOverlay);
 
             }else if (e.getSource() == backButton){

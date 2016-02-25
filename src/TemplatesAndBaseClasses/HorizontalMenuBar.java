@@ -16,7 +16,6 @@ public class HorizontalMenuBar extends TransparentOverlayBaseClassView {
     }
 
     public HorizontalMenuBar(Dimension windowDimension, MainWindow parentFrame){
-        super(windowDimension, parentFrame);
-        setHeight(40);
+        super(windowDimension.width, 40, parentFrame);
     }
 }

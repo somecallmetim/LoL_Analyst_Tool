@@ -30,10 +30,13 @@ public class RecordGameOverlay extends TransparentOverlayBaseClassView implement
     int numOfGameInCurrentSeries;
 
     JPanel mapMarkerHoldingPanel;
-    HorizontalMenuBar menuBarTopSide, bottomMenuBar;
+    HorizontalMenuBar topMenuBar, bottomMenuBar;
     JButton backButton, exitToMainMenu;
     JLabel topMarker, midMarker, jungleMarker, adcMarker, supportMarker;
     ButtonListener buttonListener;
+
+    Cursor cursor;
+    Toolkit toolkit = Toolkit.getDefaultToolkit();
 
 
     int xCoord, yCoord;
@@ -53,7 +56,7 @@ public class RecordGameOverlay extends TransparentOverlayBaseClassView implement
         game_Id = DatabaseManager.addGameToGamesTable(this.team, this.sqlDate, this.numOfGameInCurrentSeries);
 
         mapMarkerHoldingPanel = new JPanel();
-        menuBarTopSide = new HorizontalMenuBar(windowDimension, parentFrame);
+        topMenuBar = new HorizontalMenuBar(windowDimension, parentFrame);
         bottomMenuBar = new HorizontalMenuBar(windowDimension, parentFrame);
 
         parentFrame.addKeyListener(this);
@@ -70,8 +73,8 @@ public class RecordGameOverlay extends TransparentOverlayBaseClassView implement
         backButton.addActionListener(buttonListener);
         exitToMainMenu = new JButton("Exit to Main Menu");
         exitToMainMenu.addActionListener(buttonListener);
-        menuBarTopSide.add(backButton);
-        menuBarTopSide.add(exitToMainMenu);
+        topMenuBar.add(backButton);
+        topMenuBar.add(exitToMainMenu);
 
         bottomMenuBar.setBounds(0, 740, parentFrame.getWidth(), bottomMenuBar.getHeight());
         bottomMenuBar.setLayout(new FlowLayout());
@@ -91,8 +94,12 @@ public class RecordGameOverlay extends TransparentOverlayBaseClassView implement
 
 
 
+        cursor = toolkit.createCustomCursor(ImageManager.getCurrentIcon(), new Point(parentFrame.getX(),
+                parentFrame.getY()), "img");
+
+        parentFrame.setCursor(cursor);
         parentFrame.addOverlay(mapMarkerHoldingPanel);
-        parentFrame.addOverlay(menuBarTopSide, JLayeredPane.MODAL_LAYER);
+        parentFrame.addOverlay(topMenuBar, JLayeredPane.MODAL_LAYER);
         parentFrame.addOverlay(bottomMenuBar, JLayeredPane.MODAL_LAYER);
 
         //listens for mouse clicks and attempts to place icon at mouse click location
@@ -128,8 +135,28 @@ public class RecordGameOverlay extends TransparentOverlayBaseClassView implement
             }
         });
 
+        topMenuBar.addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
 
+            }
 
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                int x = e.getX();
+                int y = e.getY();
+                Rectangle buttonBoundaries = topMenuBar.getBounds();
+                if(buttonBoundaries != null && buttonBoundaries.contains(x,y)){
+                    Cursor defaultCursor = new Cursor(Cursor.DEFAULT_CURSOR);
+                    topMenuBar.setCursor(defaultCursor);
+                }else {
+                    cursor = toolkit.createCustomCursor(ImageManager.getCurrentIcon(), new Point(parentFrame.getX(),
+                            parentFrame.getY()), "img");
+                    parentFrame.setCursor(cursor);
+                    e.consume();
+                }
+            }
+        });
         screenOverlayStack.push(this);
 
     }
@@ -148,26 +175,41 @@ public class RecordGameOverlay extends TransparentOverlayBaseClassView implement
             case KeyEvent.VK_Q:
                 ImageManager.setCurrentIcon(1);
                 whatOccurred = top;
+                cursor = toolkit.createCustomCursor(ImageManager.getCurrentIcon(), new Point(parentFrame.getX(),
+                        parentFrame.getY()), "img");
+                parentFrame.setCursor(cursor);
                 e.consume();
                 break;
             case KeyEvent.VK_W:
                 ImageManager.setCurrentIcon(2);
                 whatOccurred = mid;
+                cursor = toolkit.createCustomCursor(ImageManager.getCurrentIcon(), new Point(parentFrame.getX(),
+                        parentFrame.getY()), "img");
+                parentFrame.setCursor(cursor);
                 e.consume();
                 break;
             case KeyEvent.VK_E:
                 ImageManager.setCurrentIcon(3);
                 whatOccurred = adc;
+                cursor = toolkit.createCustomCursor(ImageManager.getCurrentIcon(), new Point(parentFrame.getX(),
+                        parentFrame.getY()), "img");
+                parentFrame.setCursor(cursor);
                 e.consume();
                 break;
             case KeyEvent.VK_R:
                 ImageManager.setCurrentIcon(4);
                 whatOccurred = supp;
+                cursor = toolkit.createCustomCursor(ImageManager.getCurrentIcon(), new Point(parentFrame.getX(),
+                        parentFrame.getY()), "img");
+                parentFrame.setCursor(cursor);
                 e.consume();
                 break;
             case KeyEvent.VK_T:
                 ImageManager.setCurrentIcon(5);
                 whatOccurred = jungle;
+                cursor = toolkit.createCustomCursor(ImageManager.getCurrentIcon(), new Point(parentFrame.getX(),
+                        parentFrame.getY()), "img");
+                parentFrame.setCursor(cursor);
                 e.consume();
                 break;
             default:
@@ -199,13 +241,13 @@ public class RecordGameOverlay extends TransparentOverlayBaseClassView implement
                 //on the layered pane, which definitely puts a hole in my first theory
                 parentFrame.removeCurrentScreenOverlay();
                 parentFrame.removeOverlay(mapMarkerHoldingPanel);
-                parentFrame.removeOverlay(menuBarTopSide);
+                parentFrame.removeOverlay(topMenuBar);
                 parentFrame.removeOverlay(bottomMenuBar);
                 parentFrame.addOverlay(screenOverlayStack.pop());
             }else if (e.getSource() == exitToMainMenu){
                 parentFrame.removeCurrentScreenOverlay();
                 parentFrame.removeOverlay(mapMarkerHoldingPanel);
-                parentFrame.removeOverlay(menuBarTopSide);
+                parentFrame.removeOverlay(topMenuBar);
                 parentFrame.removeOverlay(bottomMenuBar);
                 //while(!(holdingVariable = screenOverlayStack.pop()).equals(MenusAndOverlays.MainMenuController.class)){}
                 //parentFrame.addOverlay(holdingVariable);

@@ -1,13 +1,10 @@
 package MenusAndOverlays;
 
 
-import DataManagement.ScreenOverlayStack;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
-import java.util.ArrayList;
 
 /**
  * Created by timbauer on 2/20/16.
@@ -26,7 +23,7 @@ public class RecordGameMenuController extends TransparentOverlayBaseClassControl
 
     String region;
 
-    StartRecordingOverlay startRecordingOverlay;
+    StartRecordingOverlayController startRecordingOverlayController;
 
 
     public RecordGameMenuController(RecordGameMenuView recordGameMenuView, RecordGameMenuModel recordGameMenuModel){
@@ -131,16 +128,15 @@ public class RecordGameMenuController extends TransparentOverlayBaseClassControl
                 int gameNumber = recordGameMenuView.getGameNumberSelected();
                 Date sqlDate = recordGameMenuModel.convertStringToSqlDate(month, day, year);
 
-
-                RecordGameMenuView.parentFrame.removeCurrentScreenOverlay();
-
                 try{
-                    startRecordingOverlay = new StartRecordingOverlay(teamName, region, sqlDate, gameNumber);
+                    parentFrame.removeCurrentScreenOverlay();
+                    startRecordingOverlayController = new StartRecordingOverlayController(new StartRecordingOverlayView(),
+                            new StartRecordingOverlayModel(), teamName, region, sqlDate, gameNumber);
                 }catch (Exception exception){
                     System.out.println("Recording Map Menu\n" + exception);
+                    onInit();
                 }
-                parentFrame.removeCurrentScreenOverlay();
-                parentFrame.addOverlay(startRecordingOverlay);
+
 
             }else if (e.getSource() == backButton){
                 parentFrame.removeCurrentScreenOverlay();

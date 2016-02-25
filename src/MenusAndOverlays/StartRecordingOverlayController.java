@@ -8,6 +8,7 @@ import java.sql.Date;
 /**
  * Created by timbauer on 2/24/16.
  */
+
 public class StartRecordingOverlayController extends TransparentOverlayBaseClassController{
 
     StartRecordingOverlayView startRecordingOverlayView;

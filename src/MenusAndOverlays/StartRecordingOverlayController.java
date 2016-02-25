@@ -16,7 +16,7 @@ public class StartRecordingOverlayController extends TransparentOverlayBaseClass
 
     Component startRecordingButton, backButton;
 
-    RecordGameOverlay recordGameOverlay;
+    RecordGameOverlayView recordGameOverlayView;
 
     String team, teamRegion;
     Date gameDate;
@@ -72,11 +72,11 @@ public class StartRecordingOverlayController extends TransparentOverlayBaseClass
             if(e.getSource() == startRecordingButton){
                 parentFrame.removeCurrentScreenOverlay();
                 try {
-                    recordGameOverlay = new RecordGameOverlay(team, teamRegion, gameDate, numOfGameInCurrentSeries);
+                    recordGameOverlayView = new RecordGameOverlayView(team, teamRegion, gameDate, numOfGameInCurrentSeries);
                 } catch (Exception exception){
                     System.out.println("MenusAndOverlays.StartRecordingOverlayView problem: " + exception);
                 }
-                parentFrame.addOverlay(recordGameOverlay);
+                parentFrame.addOverlay(recordGameOverlayView);
             }else if (e.getSource() == backButton){
                 parentFrame.removeCurrentScreenOverlay();
                 parentFrame.addOverlay(screenOverlayStack.pop());

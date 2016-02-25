@@ -16,7 +16,7 @@ import java.sql.Date;
 /**
  * Created by timbauer on 12/27/15.
  */
-public class RecordGameOverlay extends TransparentOverlayBaseClassView implements KeyListener {
+public class RecordGameOverlayView extends TransparentOverlayBaseClassView implements KeyListener {
 
     long timeEventOccurred = 0;
     String top = "<html><font color='white'>Q: Top Laner Ward</font></html>";
@@ -24,7 +24,7 @@ public class RecordGameOverlay extends TransparentOverlayBaseClassView implement
     String adc = "<html><font color='white'>E: ADC Ward</font></html>";
     String supp = "<html><font color='white'>R: Support Ward</font></html>";
     String jungle = "<html><font color='white'>T: Jungler Ward</font></html>";
-    String whatOccurred = jungle;
+    String whatOccurred = top;
     String team, teamRegion, game_Id;
     Date sqlDate;
     int numOfGameInCurrentSeries;
@@ -43,7 +43,7 @@ public class RecordGameOverlay extends TransparentOverlayBaseClassView implement
 
     ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
 
-    public RecordGameOverlay(String team, String teamRegion, Date sqlDate, int numOfGameInCurrentSeries) throws IOException, Exception {
+    public RecordGameOverlayView(String team, String teamRegion, Date sqlDate, int numOfGameInCurrentSeries) throws IOException, Exception {
         super();
 
         buttonListener = new ButtonListener();

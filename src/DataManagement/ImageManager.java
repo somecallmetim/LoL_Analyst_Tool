@@ -47,7 +47,7 @@ public class ImageManager {
         jungleIcon = ImageIO.read(new File(jungleIconStr));
         SrMap = ImageIO.read(new File(mapImageDirAndName));
 
-        currentIcon = jungleIcon;
+        currentIcon = topIcon;
     }
 
     public static ImageManager getImageManager()throws IOException{

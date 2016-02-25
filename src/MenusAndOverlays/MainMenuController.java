@@ -14,7 +14,6 @@ import java.awt.event.ActionListener;
 public class MainMenuController {
 
     ScreenOverlayStack screenOverlayStack = ScreenOverlayStack.getScreenOverlayStack();
-    JPanel recordingMapMenu, reviewGamesMenu, manageTeamsMenu;
     MainWindow parentFrame = MainWindow.getMainWindow();
     static ButtonListener buttonListener;
 

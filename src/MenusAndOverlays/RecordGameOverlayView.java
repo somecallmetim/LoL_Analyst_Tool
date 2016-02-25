@@ -31,7 +31,7 @@ public class RecordGameOverlayView extends TransparentOverlayBaseClassView imple
 
     JPanel mapMarkerHoldingPanel;
     HorizontalMenuBar topMenuBar, bottomMenuBar;
-    JButton backButton, exitToMainMenu;
+    JButton exitToMainMenu;
     JLabel topMarker, midMarker, jungleMarker, adcMarker, supportMarker;
     ButtonListener buttonListener;
 
@@ -69,11 +69,8 @@ public class RecordGameOverlayView extends TransparentOverlayBaseClassView imple
         mapMarkerHoldingPanel.setOpaque(false);
 
 
-        backButton = new JButton("Back");
-        backButton.addActionListener(buttonListener);
         exitToMainMenu = new JButton("Exit to Main Menu");
         exitToMainMenu.addActionListener(buttonListener);
-        topMenuBar.add(backButton);
         topMenuBar.add(exitToMainMenu);
 
         bottomMenuBar.setBounds(0, 740, parentFrame.getWidth(), bottomMenuBar.getHeight());
@@ -119,9 +116,9 @@ public class RecordGameOverlayView extends TransparentOverlayBaseClassView imple
                 JLabel marker = new JLabel(new ImageIcon(currentIconSelected));
 
                 //this code tries to add map icon to map
-                mapMarkerHoldingPanel.add(marker);
                 Dimension size = marker.getPreferredSize();
                 marker.setBounds(xCoord, yCoord, size.width, size.height);
+                parentFrame.addIconToModalLayer(marker);
 
                 //redraws the map with new map icon on top
                 mapMarkerHoldingPanel.validate();
@@ -157,6 +154,7 @@ public class RecordGameOverlayView extends TransparentOverlayBaseClassView imple
                 }
             }
         });
+
         screenOverlayStack.push(this);
 
     }
@@ -229,29 +227,10 @@ public class RecordGameOverlayView extends TransparentOverlayBaseClassView imple
 
         @Override
         public void actionPerformed(ActionEvent e){
-            if (e.getSource() == backButton){
-                //shouldn't need all these, but if top remove call isn't present, the previous screens buttons
-                //become unclickable. Since their at the top of the screen, this makes me wonder if the top
-                //menu bar is somehow not being completely removed (ie it's at on a higher tier on my
-                //layered pane and maybe it's blocking the buttons). If the second remove call isn't present,
-                //then the main overlay from this screen is never removed. The only one of these that's behaving as
-                //expected is the third remove call where removing it causes the top menu bar to completely remain
-                //intact including the back button. However, removing this call, while leaving the back button in place
-                //where it shouldn't be on the previous screen, still allows me to click on the buttons below it
-                //on the layered pane, which definitely puts a hole in my first theory
-                parentFrame.removeCurrentScreenOverlay();
-                parentFrame.removeOverlay(mapMarkerHoldingPanel);
-                parentFrame.removeOverlay(topMenuBar);
-                parentFrame.removeOverlay(bottomMenuBar);
-                parentFrame.addOverlay(screenOverlayStack.pop());
-            }else if (e.getSource() == exitToMainMenu){
-                parentFrame.removeCurrentScreenOverlay();
-                parentFrame.removeOverlay(mapMarkerHoldingPanel);
-                parentFrame.removeOverlay(topMenuBar);
-                parentFrame.removeOverlay(bottomMenuBar);
-                //while(!(holdingVariable = screenOverlayStack.pop()).equals(MenusAndOverlays.MainMenuController.class)){}
-                //parentFrame.addOverlay(holdingVariable);
-                //parentFrame.addOverlay(new MainMenuController());
+             if (e.getSource() == exitToMainMenu){
+                Cursor defaultCursor = new Cursor(Cursor.DEFAULT_CURSOR);
+                parentFrame.setCursor(defaultCursor);
+                parentFrame.reset();
             }
         }
     }

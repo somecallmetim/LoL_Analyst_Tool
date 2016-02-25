@@ -39,7 +39,11 @@ public class ScreenOverlayStack extends Stack<TransparentOverlayBaseClassView> {
             currentScreen = null;
             return holdingVariable;
         }
+    }
 
+    public void clearStack(){
+        this.clear();
+        currentScreen = null;
     }
 
 
